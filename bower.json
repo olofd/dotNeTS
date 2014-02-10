@@ -1,0 +1,28 @@
+{
+  "name": "dotNeTS",
+  "main": "linq.js",
+  "version": "0.0.1",
+  "authors": [
+    "'Olof <'olof.dahlbom@me.com'>"
+  ],
+  "dependencies" : {
+	"lodash" : "latest",
+	"requirejs" : "latest"
+  },
+  "description": ".NET library-syntax for typescript/javascript",
+  "keywords": [
+    ".net",
+    "typescript",
+    "linq",
+    "ienumerable",
+    "generics"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
