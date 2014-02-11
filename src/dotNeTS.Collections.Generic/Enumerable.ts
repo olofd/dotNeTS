@@ -21,7 +21,7 @@ module dotNeTS.Collections.Generic {
 
         }
 
-        FirstOrDefault(predicate?: _.ListIterator<T, boolean>): T { 
+        FirstOrDefault(predicate?: _.ListIterator<T, boolean>): T {
             if (!this.Any()) {
                 return null;
             }
@@ -30,6 +30,7 @@ module dotNeTS.Collections.Generic {
                 if (!result) {
                     return null;
                 }
+                return result;
             }
             return this.innerArray[0] || null;
         }
@@ -38,6 +39,7 @@ module dotNeTS.Collections.Generic {
             if (!this.Any()) {
                 throw new dotNeTS.InvalidOperationException("Sequence contains no elements");
             }
+ 
             if (predicate) {
                 var elements = _.where(this.innerArray, predicate);
                 var count = elements.length;

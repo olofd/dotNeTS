@@ -6,8 +6,7 @@
     "'Olof <'olof.dahlbom@me.com'>"
   ],
   "dependencies" : {
-	"lodash" : "latest",
-	"requirejs" : "latest"
+	"lodash" : "latest"
   },
   "description": ".NET library-syntax for typescript/javascript",
   "keywords": [
