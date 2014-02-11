@@ -13,36 +13,36 @@ and functionality. e.g the List-implementation relies on lodash.</p>
 <p>dependencies:<br />
 *   lodash</p>
 
-<pre><code>module app {
-    interface User {
-        id: number
-        username: string;
-    }
-    export class UserManager {
-        constructor() {
-            //Import namespace
-            var List = dotNeTS.Collections.Generic.List;
+<pre><code>    module app {
+        interface User {
+            id: number
+            username: string;
+        }
+        export class UserManager {
+            constructor() {
+                //Import namespace
+                var List = dotNeTS.Collections.Generic.List;
 
-            //Random Data
-            var user1: User = {
-                id: 1,
-                username: "olofd",
-            };
-            var user2: User = {
-                id: 2,
-                username: "ludde",
-            };
+                //Random Data
+                var user1: User = {
+                    id: 1,
+                    username: "olofd",
+                };
+                var user2: User = {
+                    id: 2,
+                    username: "ludde",
+                };
 
-            //Regular javascript array;
-            var arrayOfUsers = [user1, user2];
+                //Regular javascript array;
+                var arrayOfUsers = [user1, user2];
 
-            //Create List&lt;User&gt;
-            var myList = new List&lt;User&gt;(arrayOfUsers);
-            var userNameArray = myList.Where(b=&gt; b.id === 1).Select(b=&gt; b.username).ToArray();
-            console.log(userNameArray);
-            //=&gt; ['olofd']
+                //Create List&lt;User&gt;
+                var myList = new List&lt;User&gt;(arrayOfUsers);
+                var userNameArray = myList.Where(b=&gt; b.id === 1).Select(b=&gt; b.username).ToArray();
+                console.log(userNameArray);
+                //=&gt; ['olofd']
+            }
         }
     }
-}
-var userMgr = new app.UserManager();
+    var userMgr = new app.UserManager();
 </code></pre>
