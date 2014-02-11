@@ -3,9 +3,9 @@ dotNeTS
 
 .NET library-syntax for typescript/javascript
 
-This library aims to implement the good parts of .Net-syntax in javascript.
-If your new to javascript you'll have a hard time dealing with the functional style
-of programming often implemented in ex. lodash while working with data.
+This library aims to implement the good parts of .Net-syntax in typescript/javascript.
+If you're new to javascript you'll have a hard time dealing with the functional style
+of programming often implemented in ex. lodash for dealing with data-operations.
 dotNeTS gives you lambda expressions and full implementation (soon) of System.Collection.Generics.
 
 dotNeTS also aims to NOT reinvent the wheel and use javascript 'best-choices' for data-mainpulation
