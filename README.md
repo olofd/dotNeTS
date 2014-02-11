@@ -8,7 +8,7 @@ If you're new to javascript you'll have a hard time dealing with the functional 
 of programming often implemented in ex. lodash for dealing with data-operations.
 dotNeTS gives you lambda expressions and full implementation (soon) of System.Collection.Generics.
 
-dotNeTS also aims to NOT reinvent the wheel and use javascript 'best-choices' for data-mainpulation
+dotNeTS also aims to NOT reinvent the wheel and uses javascript 'best-choices' for data-mainpulation
 and functionality. e.g the List-implementation relies on lodash.
 
 dependencies:
