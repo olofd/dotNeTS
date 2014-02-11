@@ -17,7 +17,7 @@ module.exports = function (grunt) {
                 options: {
                     files: [
                               'bower_components/lodash/dist/lodash.js',
-                              'dist/<%= pkg.name %>-<%= pkg.version %>.min.js',
+                              'dist/<%= pkg.name %>.min.js',
                               'test/spec/**/*.js',
 
                     ],
@@ -42,18 +42,19 @@ module.exports = function (grunt) {
                     'src/dotNeTS.Collections.Generic/Enumerable.ts',
                     'src/dotNeTS.Collections.Generic/List.ts'
                 ],
-                dest: 'dist/<%= pkg.name %>-<%= pkg.version %>.js',
+                dest: 'dist/<%= pkg.name %>.js',
                 options: {
                     module: 'amd',
-                    sourcemap: true
+                    sourcemap: true,
+                    declaration : true
                 }
             }
         },
         uglify: {
             dist: {
                 files: {
-                    'dist/<%= pkg.name %>-<%= pkg.version %>.min.js': [
-                        'dist/<%= pkg.name %>-<%= pkg.version %>.js'
+                    'dist/<%= pkg.name %>.min.js': [
+                        'dist/<%= pkg.name %>.js'
                     ]
                 }
             }

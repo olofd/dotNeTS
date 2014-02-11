@@ -57,6 +57,7 @@ var dotNeTS;
                         if (!result) {
                             return null;
                         }
+                        return result;
                     }
                     return this.innerArray[0] || null;
                 };
@@ -65,6 +66,7 @@ var dotNeTS;
                     if (!this.Any()) {
                         throw new dotNeTS.InvalidOperationException("Sequence contains no elements");
                     }
+
                     if (predicate) {
                         var elements = _.where(this.innerArray, predicate);
                         var count = elements.length;
@@ -118,7 +120,7 @@ var dotNeTS;
                 };
 
                 Enumerable.prototype.Select = function (callback) {
-                    return _.map(this.innerArray, callback);
+                    return new Enumerable(_.map(this.innerArray, callback));
                 };
 
                 Enumerable.prototype.Where = function (predicate) {
@@ -163,4 +165,4 @@ var dotNeTS;
     })(dotNeTS.Collections || (dotNeTS.Collections = {}));
     var Collections = dotNeTS.Collections;
 })(dotNeTS || (dotNeTS = {}));
-//# sourceMappingURL=dotNeTS-0.0.1.js.map
+//# sourceMappingURL=dotNeTS.js.map
