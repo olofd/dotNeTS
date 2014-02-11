@@ -1,12 +1,9 @@
 module app {
-
     interface User {
         id: number
         username: string;
     }
-
     export class UserManager {
-
         constructor() {
             //Import namespace
             var List = dotNeTS.Collections.Generic.List;
@@ -29,14 +26,7 @@ module app {
             var userNameArray = myList.Where(b=> b.id === 1).Select(b=> b.username).ToArray();
             console.log(userNameArray);
             //=> ['olofd']
-            
-
         }
-
-
     }
-
 }
-
-
 var userMgr = new app.UserManager();

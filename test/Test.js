@@ -32,6 +32,5 @@ var app;
     })();
     app.UserManager = UserManager;
 })(app || (app = {}));
-
 var userMgr = new app.UserManager();
 //# sourceMappingURL=Test.js.map
