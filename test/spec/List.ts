@@ -1,7 +1,6 @@
-/// <reference path="../../../scripts/typings/jasmine/jasmine.d.ts" />
 'use strict';
 
-class User {
+interface User {
     id: number;
     userName: string;
     firstName: string;
@@ -13,26 +12,29 @@ function GetUser(): User {
 }
 
 function GetUsers(): User[] {
-    var userOne = new User();
-    userOne.id = 1;
-    userOne.firstName = "Olof";
-    userOne.lastName = "Dahlbom";
-    userOne.userName = "olofd";
-    userOne.age = 28;
+    var userOne: User = {
+        id : 1,
+        userName : "olofd",
+        firstName : "Olof",
+        lastName : "Dahlbom",
+        age : 28
+    };
 
-    var userTwo = new User();
-    userTwo.id = 2;
-    userTwo.firstName = "Magnus";
-    userTwo.lastName = "Farje";
-    userTwo.userName = "mfe";
-    userTwo.age = 28;
+    var userTwo: User = {
+        id: 2,
+        userName: "olofd",
+        firstName: "Magnus",
+        lastName: "Farje",
+        age: 28
+    };
 
-    var userThree = new User();
-    userThree.id = 3;
-    userThree.firstName = "Ludvig";
-    userThree.lastName = "Enstrom";
-    userThree.userName = "ludde";
-    userThree.age = 26;
+    var userThree: User = {
+        id: 3,
+        userName: "ludde",
+        firstName: "Ludvig",
+        lastName: "enstrom",
+        age: 26
+    };
 
     return [userOne, userTwo, userThree];
 }
@@ -111,7 +113,7 @@ describe('Test of List-implementation', function () {
     it('FirstOrDefault without predicate', function () {
         var list = getFilledList();
         var user = list.FirstOrDefault();
-        expect(user).toBeDefined();
+        expect(user).toBeDefined();  
         expect(user.id).toBe(1);
         list = new dotNeTS.Collections.Generic.List<User>();
         expect(list.FirstOrDefault()).toBe(null);
@@ -159,6 +161,14 @@ describe('Test of List-implementation', function () {
         expect(function () {
             list.Single(b => b.age === 28);
         }).toThrow();
+    });
+
+    it('Select on element', function() {
+        var list = getFilledList();
+        var newUsers = list.Select(b=> <User>{id : ++b.id, userName : b.userName});
+        var fistUser = newUsers.FirstOrDefault(); 
+        expect(fistUser.id).toBe(2);
+        expect(fistUser.age).toBeUndefined();
     });
 
 });

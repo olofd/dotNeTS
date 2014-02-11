@@ -13,7 +13,7 @@ module dotNeTS.Collections.Generic {
  
             this.innerArray = _.without(this.innerArray, item);
         }
-
+         
     }
      
 }

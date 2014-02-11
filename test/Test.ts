@@ -1,39 +1,42 @@
-
 module app {
 
-    export class User {
+    interface User {
         id: number
         username: string;
     }
 
-    export class Test {
+    export class UserManager {
+
         constructor() {
-
-            var List = dotNeTS.Collections.Generic.List;
             //Import namespace
-            var user1 = new User();
-            var user2 = new User();
-            user1.id = 12;
-            user1.username = "Olof";
-            user2.id = 11;
-            user2.username = "Kallee";
+            var List = dotNeTS.Collections.Generic.List;
 
-            var arrayOfUsers = [user1];
+            //Random Data
+            var user1: User = {
+                id: 1,
+                username: "olofd",
+            };
+            var user2: User = {
+                id: 2,
+                username: "ludde",
+            };
 
-            var user3 = new User();
-            user3.id = 19;
-            user3.username = "Goran";
+            //Regular javascript array;
+            var arrayOfUsers = [user1, user2];
 
+            //Create List<User>
             var myList = new List<User>(arrayOfUsers);
-            var e = myList.Single();
-            console.log(e);
-
-            myList.Select(b=> b.username);
+            var userNameArray = myList.Where(b=> b.id === 1).Select(b=> b.username).ToArray();
+            console.log(userNameArray);
+            //=> ['olofd']
+            
 
         }
 
 
     }
+
 }
 
-var test = new app.Test();
+
+var userMgr = new app.UserManager();

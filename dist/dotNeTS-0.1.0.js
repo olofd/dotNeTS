@@ -120,7 +120,7 @@ var dotNeTS;
                 };
 
                 Enumerable.prototype.Select = function (callback) {
-                    return _.map(this.innerArray, callback);
+                    return new Enumerable(_.map(this.innerArray, callback));
                 };
 
                 Enumerable.prototype.Where = function (predicate) {

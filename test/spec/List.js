@@ -1,35 +1,32 @@
-/// <reference path="../../../scripts/typings/jasmine/jasmine.d.ts" />
 'use strict';
-var User = (function () {
-    function User() {
-    }
-    return User;
-})();
 function GetUser() {
     return GetUsers()[0];
 }
 
 function GetUsers() {
-    var userOne = new User();
-    userOne.id = 1;
-    userOne.firstName = "Olof";
-    userOne.lastName = "Dahlbom";
-    userOne.userName = "olofd";
-    userOne.age = 28;
+    var userOne = {
+        id: 1,
+        userName: "olofd",
+        firstName: "Olof",
+        lastName: "Dahlbom",
+        age: 28
+    };
 
-    var userTwo = new User();
-    userTwo.id = 2;
-    userTwo.firstName = "Magnus";
-    userTwo.lastName = "Farje";
-    userTwo.userName = "mfe";
-    userTwo.age = 28;
+    var userTwo = {
+        id: 2,
+        userName: "olofd",
+        firstName: "Magnus",
+        lastName: "Farje",
+        age: 28
+    };
 
-    var userThree = new User();
-    userThree.id = 3;
-    userThree.firstName = "Ludvig";
-    userThree.lastName = "Enstrom";
-    userThree.userName = "ludde";
-    userThree.age = 26;
+    var userThree = {
+        id: 3,
+        userName: "ludde",
+        firstName: "Ludvig",
+        lastName: "enstrom",
+        age: 26
+    };
 
     return [userOne, userTwo, userThree];
 }
@@ -172,6 +169,16 @@ describe('Test of List-implementation', function () {
                 return b.age === 28;
             });
         }).toThrow();
+    });
+
+    it('Select on element', function () {
+        var list = getFilledList();
+        var newUsers = list.Select(function (b) {
+            return { id: ++b.id, userName: b.userName };
+        });
+        var fistUser = newUsers.FirstOrDefault();
+        expect(fistUser.id).toBe(2);
+        expect(fistUser.age).toBeUndefined();
     });
 });
 //# sourceMappingURL=List.js.map

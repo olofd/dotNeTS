@@ -93,7 +93,7 @@ module dotNeTS.Collections.Generic {
         }
 
         Select<TResult>(callback: _.ListIterator<T, TResult>) {
-            return _.map(this.innerArray, callback);
+            return new Enumerable<TResult>(_.map(this.innerArray, callback));
         }
 
         Where(predicate?: _.ListIterator<T, boolean>): Enumerable<T> {

@@ -1,42 +1,37 @@
 var app;
 (function (app) {
-    var User = (function () {
-        function User() {
-        }
-        return User;
-    })();
-    app.User = User;
-
-    var Test = (function () {
-        function Test() {
+    var UserManager = (function () {
+        function UserManager() {
+            //Import namespace
             var List = dotNeTS.Collections.Generic.List;
 
-            //Import namespace
-            var user1 = new User();
-            var user2 = new User();
-            user1.id = 12;
-            user1.username = "Olof";
-            user2.id = 11;
-            user2.username = "Kallee";
+            //Random Data
+            var user1 = {
+                id: 1,
+                username: "olofd"
+            };
+            var user2 = {
+                id: 2,
+                username: "ludde"
+            };
 
-            var arrayOfUsers = [user1];
+            //Regular javascript array;
+            var arrayOfUsers = [user1, user2];
 
-            var user3 = new User();
-            user3.id = 19;
-            user3.username = "Goran";
-
+            //Create List<User>
             var myList = new List(arrayOfUsers);
-            var e = myList.Single();
-            console.log(e);
-
-            myList.Select(function (b) {
+            var userNameArray = myList.Where(function (b) {
+                return b.id === 1;
+            }).Select(function (b) {
                 return b.username;
-            });
+            }).ToArray();
+            console.log(userNameArray);
+            //=> ['olofd']
         }
-        return Test;
+        return UserManager;
     })();
-    app.Test = Test;
+    app.UserManager = UserManager;
 })(app || (app = {}));
 
-var test = new app.Test();
+var userMgr = new app.UserManager();
 //# sourceMappingURL=Test.js.map
