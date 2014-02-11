@@ -1,3 +1,15 @@
 node_modules
 bower_components
 batfiles
+bin
+obj
+Properties
+dotNeTS.csproj
+dotNeTS.csproj.user
+dotNeTS.sln
+dotNeTS.v12.suo
+index.html
+Web.config
+Web.Debug.config
+Web.Release.config
+
