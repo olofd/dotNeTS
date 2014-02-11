@@ -15,6 +15,19 @@ dependencies:
 *   lodash
 
 
+Implementet classes:
+* System.Exception
+* System.InvalidOperationException
+* System.Collections.Generic.Enumerable
+    * First(predicate?: _.ListIterator&lt;T, boolean>): T
+
+
+Implemented interfaces:
+* System.Collections.IEnumerable
+* System.Collections.IList
+
+
+
 
         module app {
             interface User {
