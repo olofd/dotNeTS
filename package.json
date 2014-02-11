@@ -1,6 +1,6 @@
 {
   "name": "dotNeTS",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "description": ".NET library-syntax for typescript/javascript",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
