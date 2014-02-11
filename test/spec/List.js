@@ -160,14 +160,18 @@ describe('Test of List-implementation', function () {
             list.Single();
         }).toThrow();
     });
-    //it('Single with predicate', function () {
-    //    var list = getFilledList();
-    //    var user = list.Single(b => b.userName === "ludde");
-    //    expect(user).toBeDefined();
-    //    expect(user.userName).toBe("ludde");
-    //    expect(function () {
-    //        list.Single(b => b.age === 28);
-    //    }).toThrow();
-    //});
+    it('Single with predicate', function () {
+        var list = getFilledList();
+        var user = list.Single(function (b) {
+            return b.userName === "ludde";
+        });
+        expect(user).toBeDefined();
+        expect(user.userName).toBe("ludde");
+        expect(function () {
+            list.Single(function (b) {
+                return b.age === 28;
+            });
+        }).toThrow();
+    });
 });
 //# sourceMappingURL=List.js.map

@@ -149,17 +149,17 @@ describe('Test of List-implementation', function () {
         var user = users.Single();
         expect(user).toBeDefined();
         var list = getFilledList();
-        expect(function () { list.Single(); }).toThrow();
+        expect(function () { list.Single(); }).toThrow(); 
     });
-    //it('Single with predicate', function () {
-    //    var list = getFilledList();
-    //    var user = list.Single(b => b.userName === "ludde");
-    //    expect(user).toBeDefined();
-    //    expect(user.userName).toBe("ludde");
-    //    expect(function () {
-    //        list.Single(b => b.age === 28);
-    //    }).toThrow();
-    //});
+    it('Single with predicate', function () {
+        var list = getFilledList();
+        var user = list.Single(b => b.userName === "ludde");
+        expect(user).toBeDefined();
+        expect(user.userName).toBe("ludde");
+        expect(function () {
+            list.Single(b => b.age === 28);
+        }).toThrow();
+    });
 
 });
- 
+  

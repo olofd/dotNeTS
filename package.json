@@ -1,6 +1,6 @@
 {
   "name": "dotNeTS",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": ".NET library-syntax for typescript/javascript",
   "main": "app.js",
   "scripts": {
@@ -32,6 +32,8 @@
     "requirejs": "~2.1.10",
     "karma-requirejs": "~0.2.1",
     "karma-phantomjs-launcher": "~0.1.2",
-    "karma": "~0.10.9"
+    "karma": "~0.10.9",
+    "grunt-karma": "~0.6.2",
+    "grunt-contrib-watch": "~0.5.3"
   }
 }
