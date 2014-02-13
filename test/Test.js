@@ -3,7 +3,7 @@ var app;
     var UserManager = (function () {
         function UserManager() {
             //Import namespace
-            var List = dotNeTS.Collections.Generic.List;
+            var List = dotNeTS.List;
 
             //Random Data
             var user1 = {

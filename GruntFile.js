@@ -35,16 +35,12 @@ module.exports = function (grunt) {
             base: {
                 src: [
                     'bower_components/typings/lodash/lodash.ts',
-                    'src/dotNeTS/Exception.ts',
-                    'src/dotNeTS/InvalidOperationException.ts',
-                    'src/dotNeTS.Collections/IEnumerable.ts',
-                    'src/dotNeTS.Collections/IList.ts',
-                    'src/dotNeTS.Collections.Generic/Enumerable.ts',
-                    'src/dotNeTS.Collections.Generic/List.ts'
+                    'src/**/*.ts'
                 ],
                 dest: 'dist/<%= pkg.name %>.js',
                 options: {
                     module: 'amd',
+                    target: 'es5',
                     sourcemap: true,
                     declaration : true
                 }

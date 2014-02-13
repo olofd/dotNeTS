@@ -14,7 +14,7 @@ function GetUsers() {
 
     var userTwo = {
         id: 2,
-        userName: "olofd",
+        userName: "mange",
         firstName: "Magnus",
         lastName: "Farje",
         age: 28
@@ -34,14 +34,14 @@ function GetUsers() {
 describe('Test of List-implementation', function () {
     var getFilledList = function () {
         var users = GetUsers();
-        var list = new dotNeTS.Collections.Generic.List();
+        var list = new dotNeTS.List();
         list.Add(users[0]);
         list.Add(users[1]);
         list.Add(users[2]);
         return list;
     };
     it('Should excist in namespace', function () {
-        var list = new dotNeTS.Collections.Generic.List();
+        var list = new dotNeTS.List();
         expect(list).toBeDefined();
     });
     it('Should be able to get test data', function () {
@@ -49,31 +49,31 @@ describe('Test of List-implementation', function () {
         expect(GetUser()).toBeDefined();
     });
     it('Add defined', function () {
-        var list = new dotNeTS.Collections.Generic.List();
+        var list = new dotNeTS.List();
         expect(list.Add).toBeDefined();
     });
     it('Add one', function () {
         var testUser = GetUser();
-        var list = new dotNeTS.Collections.Generic.List();
+        var list = new dotNeTS.List();
         expect(list.Add).toBeDefined();
         list.Add(testUser);
         expect(list.innerArray.length).toBe(1);
     });
     it('Add two', function () {
         var testUser = GetUser();
-        var list = new dotNeTS.Collections.Generic.List();
+        var list = new dotNeTS.List();
         list.Add(testUser);
         list.Add(testUser);
         expect(list.innerArray.length).toBe(2);
     });
     it('Add constructor', function () {
         var users = GetUsers();
-        var list = new dotNeTS.Collections.Generic.List(users);
+        var list = new dotNeTS.List(users);
         expect(list.innerArray.length).toBe(3);
     });
     it('Add one Remove one', function () {
         var testUser = GetUser();
-        var list = new dotNeTS.Collections.Generic.List();
+        var list = new dotNeTS.List();
         expect(list.Add).toBeDefined();
         list.Add(testUser);
         expect(list.innerArray.length).toBe(1);
@@ -110,7 +110,7 @@ describe('Test of List-implementation', function () {
         var user = list.FirstOrDefault();
         expect(user).toBeDefined();
         expect(user.id).toBe(1);
-        list = new dotNeTS.Collections.Generic.List();
+        list = new dotNeTS.List();
         expect(list.FirstOrDefault()).toBe(null);
     });
     it('FirstOrDefault with predicate', function () {
@@ -130,11 +130,22 @@ describe('Test of List-implementation', function () {
         var user = list.First();
         expect(user).toBeDefined();
         expect(user.id).toBe(1);
-        list = new dotNeTS.Collections.Generic.List();
+    });
+    it('First all exceptions', function () {
+        var list = new dotNeTS.List();
         expect(function () {
             list.First();
-        }).toThrow();
+        }).toThrow("Sequence contains no elements");
+
+        var list = new dotNeTS.List();
+        list.Add(GetUser());
+        expect(function () {
+            list.First(function (b) {
+                return b.userName === "olof";
+            });
+        }).toThrow("Sequence contains no matching element");
     });
+
     it('First with predicate', function () {
         var list = getFilledList();
         var user = list.First(function (b) {
@@ -149,7 +160,7 @@ describe('Test of List-implementation', function () {
         }).toThrow();
     });
     it('Single without predicate', function () {
-        var users = new dotNeTS.Collections.Generic.List([GetUser()]);
+        var users = new dotNeTS.List([GetUser()]);
         var user = users.Single();
         expect(user).toBeDefined();
         var list = getFilledList();
@@ -171,7 +182,7 @@ describe('Test of List-implementation', function () {
         }).toThrow();
     });
 
-    it('Select on element', function () {
+    it('Select one element', function () {
         var list = getFilledList();
         var newUsers = list.Select(function (b) {
             return { id: ++b.id, userName: b.userName };
@@ -179,6 +190,37 @@ describe('Test of List-implementation', function () {
         var fistUser = newUsers.FirstOrDefault();
         expect(fistUser.id).toBe(2);
         expect(fistUser.age).toBeUndefined();
+    });
+    it('Contains', function () {
+        var list = getFilledList();
+        expect(list.Contains).toBeDefined();
+        expect(list.Contains(list.FirstOrDefault())).toBeTruthy();
+        expect(list.Contains({})).toBeFalsy();
+    });
+    it('ForEack', function () {
+        var list = getFilledList();
+        expect(list.ForEach).toBeDefined();
+        list.ForEach(function (user, index, collection) {
+            expect(user).toBeDefined();
+            expect(index).toBeDefined();
+            expect(collection).toBeDefined();
+        });
+    });
+    it('OrderBy', function () {
+        var list = getFilledList();
+        expect(list.OrderBy).toBeDefined();
+        var firstNameOrder = list.OrderByDecending(function (b) {
+            return b.age;
+        });
+        var nameThenAge = firstNameOrder.ThenBy(function (b) {
+            return b.firstName;
+        });
+        _.map(nameThenAge.sortExpressions, function (e) {
+            console.log(e);
+        });
+        var list = nameThenAge.ToList();
+        console.log(list.First());
+        //var first = nameThenAge.Count();
     });
 });
 //# sourceMappingURL=List.js.map

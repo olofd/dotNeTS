@@ -1,6 +1,6 @@
-module dotNeTS.Collections.Generic {
+module dotNeTS {
 
-    export class List<T> extends dotNeTS.Collections.Generic.Enumerable<T> {
+    export class List<T> extends Enumerable<T> {
 
         constructor(innerArray?: Array<T>) {
             super(innerArray);
@@ -13,6 +13,7 @@ module dotNeTS.Collections.Generic {
  
             this.innerArray = _.without(this.innerArray, item);
         }
+
          
     }
      

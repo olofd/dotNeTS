@@ -1,4 +1,4 @@
-module dotNeTS.Collections {
+module dotNeTS {
     export interface IList<T> {
         Add(item: T): void;
     }

@@ -10,18 +10,19 @@ dotNeTS gives you lambda expressions and full implementation (soon) of System.Co
 <p>dotNeTS also aims to NOT reinvent the wheel and uses javascript 'best-choices' for data-mainpulation<br />
 and functionality. e.g the List-implementation relies on lodash.</p>
 
+<p>And <strong>YES</strong> right now, this library uses uppercase for methods, something that is frowned upon in javascript-world.<br />
+I know about the dangers with the new-operator and binding this to global-object. But my defence is that dotNeTS soon<br />
+will compile to two seperate libraries one with uppercase(.NET-ish) and one that passes jslint. And also that<br />
+if you use typescript, it helps you avoid the new and this-pitfalls (some atleast). At the end of the day, you still need<br />
+to know what you�re doing.</p>
+
+<p>And <strong>YES</strong> I know all about <a href="http://linqjs.codeplex.com/">Linq.js</a>, but this library is much, much smaller<br />
+and sits ontop of lodash. I built it to avoid having to pull in lodash and Linq.js in one of my latest projects.</p>
+
 <p>dependencies:<br />
 *   lodash</p>
 
-<p>Implementet classes:<br />
-* System.Exception<br />
-* System.InvalidOperationException<br />
-* System.Collections.Generic.Enumerable<br />
-    * First(predicate?: _.ListIterator&lt;T, boolean>): T</p>
-
-<p>Implemented interfaces:<br />
-* System.Collections.IEnumerable<br />
-* System.Collections.IList</p>
+<p>Example 1:</p>
 
 <pre><code>    module app {
         interface User {
@@ -56,3 +57,22 @@ and functionality. e.g the List-implementation relies on lodash.</p>
     }
     var userMgr = new app.UserManager();
 </code></pre>
+
+<p>Example 2 (Actual code from project)                    </p>
+
+<pre><code>var languagesAvailable = allLanguages.Where(s =&gt; !languagesAlreadyAdded.Where(es =&gt; es.LangCode === s.value).Any())
+                        .Where(b =&gt; b.language &amp;&amp; b.language !== "")
+                        .OrderBy(b =&gt; b.language)
+                        .ThenBy(b =&gt; b.country);
+return languagesAvailable.ToArray();:
+</code></pre>
+
+<p>Implementet classes:<br />
+* System.Exception<br />
+* System.InvalidOperationException<br />
+* System.Collections.Generic.Enumerable<br />
+    * First(predicate?: _.ListIterator&lt;T, boolean>): T</p>
+
+<p>Implemented interfaces:<br />
+* System.Collections.IEnumerable<br />
+* System.Collections.IList</p>

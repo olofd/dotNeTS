@@ -6,7 +6,7 @@ module app {
     export class UserManager {
         constructor() {
             //Import namespace
-            var List = dotNeTS.Collections.Generic.List;
+            var List = dotNeTS.List;
 
             //Random Data
             var user1: User = {
