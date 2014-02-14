@@ -16,8 +16,27 @@ var dotNeTS;
                 List.prototype.Add = function (item) {
                     this.innerArray.push(item);
                 };
+                List.prototype.AddRange = function (collection) {
+                    var _this = this;
+                    collection.ForEach(function (b) {
+                        return _this.Add(b);
+                    });
+                };
                 List.prototype.Remove = function (item) {
                     this.innerArray = _.without(this.innerArray, item);
+                };
+                List.prototype.RemoveAt = function (index) {
+                };
+                List.prototype.Clear = function () {
+                };
+
+                List.prototype.IndexOf = function (item) {
+                    return 1;
+                };
+                List.prototype.Insert = function (index, item) {
+                };
+                List.prototype.Dispose = function () {
+                    _super.prototype.Dispose.call(this);
                 };
                 return List;
             })(dotNeTS.Collections.Generic.Enumerable);

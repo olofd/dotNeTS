@@ -13,7 +13,7 @@ declare module dotNeTS {
     function createList<T>(startArray?: T[]): Collections.Generic.List<T>;
 }
 declare module dotNeTS.Collections.Generic {
-    class Enumerable<TSource> implements Collections.IEnumerable<TSource> {
+    class Enumerable<TSource> implements Collections.IEnumerable<TSource>, dotNeTS.IDisposable {
         public currentCollection: TSource[];
         public getEvaluatedCollection(): TSource[];
         public innerArray : TSource[];
@@ -34,13 +34,20 @@ declare module dotNeTS.Collections.Generic {
         public Where(predicate?: dotNeTS.IFunc<TSource, boolean>): Collections.IEnumerable<TSource>;
         public ToArray(): TSource[];
         public ToList(): Generic.List<TSource>;
+        public Dispose(): void;
     }
 }
 declare module dotNeTS.Collections.Generic {
-    class List<T> extends Generic.Enumerable<T> {
-        constructor(innerArray?: T[]);
-        public Add(item: T): void;
-        public Remove(item: T): void;
+    class List<TSource> extends Generic.Enumerable<TSource> implements Collections.IList<TSource>, dotNeTS.IDisposable {
+        constructor(innerArray?: TSource[]);
+        public Add(item: TSource): void;
+        public AddRange(collection: Collections.IEnumerable<TSource>): void;
+        public Remove(item: TSource): void;
+        public RemoveAt(index: number): void;
+        public Clear(): void;
+        public IndexOf(item: TSource): number;
+        public Insert(index: number, item: TSource): void;
+        public Dispose(): void;
     }
 }
 declare module dotNeTS.Collections {
@@ -62,8 +69,15 @@ declare module dotNeTS.Collections {
     }
 }
 declare module dotNeTS.Collections {
-    interface IList<T> {
-        Add(item: T): void;
+    interface IList<TSource> {
+        Add(item: TSource): void;
+        AddRange(collection: Collections.IEnumerable<TSource>): void;
+        Remove(item: TSource): void;
+        RemoveAt(index: number): any;
+        Clear(): void;
+        Contains(item: TSource): boolean;
+        IndexOf(item: TSource): number;
+        Insert(index: number, item: TSource): void;
     }
 }
 declare module dotNeTS.Linq {
@@ -91,6 +105,7 @@ declare module dotNeTS.Linq {
         public ThenBy<TSort>(callback: dotNeTS.IFunc<TSource, TSort>): OrderedEnumerable<TSource>;
         public ThenByDecending<TSort>(callback: dotNeTS.IFunc<TSource, TSort>): OrderedEnumerable<TSource>;
         private EvaluateOrderBy();
+        public Dispose(): void;
     }
 }
 declare module dotNeTS.Linq {
@@ -102,6 +117,11 @@ declare module dotNeTS.Linq {
 declare module dotNeTS {
     class ArgumentOutOfRangeException extends dotNeTS.Exception {
         constructor(message: string);
+    }
+}
+declare module dotNeTS {
+    interface IDisposable {
+        Dispose(): void;
     }
 }
 declare module dotNeTS {

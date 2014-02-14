@@ -8,7 +8,8 @@ module.exports = function(config) {
     frameworks :['jasmine'],
     files: [
       'bower_components/lodash/dist/lodash.js',
-      'dist/dotNeTS.js',
+      'src/dotNeTS/Exception.js',
+      'src/**/*.js',
       'test/spec/**/*.js'
     ],
     exclude: [

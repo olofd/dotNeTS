@@ -62,5 +62,9 @@ module dotNeTS.Linq {
             })
             return this.currentCollection;
         }
+        Dispose() {
+            delete this.sortExpressions;
+            super.Dispose();
+        }
     }
 }

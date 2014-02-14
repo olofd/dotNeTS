@@ -26,13 +26,17 @@ var dotNeTS;
         (function (Generic) {
             var Enumerable = (function () {
                 function Enumerable(innerArray) {
-                    this.innerArray = innerArray || new Array();
+                    this.innerArray = innerArray;
+                    ;
                 }
                 Enumerable.prototype.getEvaluatedCollection = function () {
                     return this.currentCollection;
                 };
                 Object.defineProperty(Enumerable.prototype, "innerArray", {
                     get: function () {
+                        if (!this.currentCollection) {
+                            this.innerArray = new Array();
+                        }
                         return this.getEvaluatedCollection();
                     },
                     set: function (innerArray) {
@@ -43,6 +47,9 @@ var dotNeTS;
                 });
 
                 Enumerable.prototype.ElementAt = function (index) {
+                    if (index >= this.Count()) {
+                        throw new dotNeTS.ArgumentOutOfRangeException("Index was out of range. Must be non-negative and less than the size of the collection.");
+                    }
                     return this.innerArray[index];
                 };
                 Enumerable.prototype.ElementAtOrDefault = function (index) {
@@ -90,12 +97,10 @@ var dotNeTS;
                     }
                     return this.innerArray[0] || null;
                 };
-
                 Enumerable.prototype.Single = function (predicate) {
                     if (!this.Any()) {
                         throw new dotNeTS.InvalidOperationException("Sequence contains no elements");
                     }
-
                     if (predicate) {
                         var elements = _.where(this.innerArray, predicate);
                         var count = elements.length;
@@ -163,6 +168,10 @@ var dotNeTS;
                 Enumerable.prototype.ToList = function () {
                     return new dotNeTS.Collections.Generic.List(this.innerArray);
                 };
+
+                Enumerable.prototype.Dispose = function () {
+                    delete this.currentCollection;
+                };
                 return Enumerable;
             })();
             Generic.Enumerable = Enumerable;
@@ -189,8 +198,27 @@ var dotNeTS;
                 List.prototype.Add = function (item) {
                     this.innerArray.push(item);
                 };
+                List.prototype.AddRange = function (collection) {
+                    var _this = this;
+                    collection.ForEach(function (b) {
+                        return _this.Add(b);
+                    });
+                };
                 List.prototype.Remove = function (item) {
                     this.innerArray = _.without(this.innerArray, item);
+                };
+                List.prototype.RemoveAt = function (index) {
+                };
+                List.prototype.Clear = function () {
+                };
+
+                List.prototype.IndexOf = function (item) {
+                    return 1;
+                };
+                List.prototype.Insert = function (index, item) {
+                };
+                List.prototype.Dispose = function () {
+                    _super.prototype.Dispose.call(this);
                 };
                 return List;
             })(dotNeTS.Collections.Generic.Enumerable);
@@ -266,6 +294,10 @@ var dotNeTS;
                 });
                 return this.currentCollection;
             };
+            OrderedEnumerable.prototype.Dispose = function () {
+                delete this.sortExpressions;
+                _super.prototype.Dispose.call(this);
+            };
             return OrderedEnumerable;
         })(dotNeTS.Collections.Generic.Enumerable);
         Linq.OrderedEnumerable = OrderedEnumerable;
@@ -288,7 +320,7 @@ var dotNeTS;
     var ArgumentOutOfRangeException = (function (_super) {
         __extends(ArgumentOutOfRangeException, _super);
         function ArgumentOutOfRangeException(message) {
-            _super.call(this, "Index was out of range. Must be non-negative and less than the size of the collection.", message);
+            _super.call(this, "ArgumentOutOfRangeException", message);
         }
         return ArgumentOutOfRangeException;
     })(dotNeTS.Exception);

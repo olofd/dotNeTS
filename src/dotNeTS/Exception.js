@@ -1,4 +1,4 @@
-﻿var dotNeTS;
+var dotNeTS;
 (function (dotNeTS) {
     var Exception = (function () {
         function Exception(name, message) {

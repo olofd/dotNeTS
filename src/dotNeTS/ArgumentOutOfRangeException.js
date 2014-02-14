@@ -9,7 +9,7 @@ var dotNeTS;
     var ArgumentOutOfRangeException = (function (_super) {
         __extends(ArgumentOutOfRangeException, _super);
         function ArgumentOutOfRangeException(message) {
-            _super.call(this, "Index was out of range. Must be non-negative and less than the size of the collection.", message);
+            _super.call(this, "ArgumentOutOfRangeException", message);
         }
         return ArgumentOutOfRangeException;
     })(dotNeTS.Exception);

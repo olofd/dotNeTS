@@ -24,6 +24,11 @@ and sits ontop of lodash. I built it to avoid having to pull in lodash and Linq.
 dependencies:
 *   lodash
 
+Install:
+
+    bower install dotNeTS
+
+
 Example 1:
 
         module app {

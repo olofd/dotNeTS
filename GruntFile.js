@@ -43,7 +43,7 @@ module.exports = function (grunt) {
                     module: 'amd',
                     target: 'es5',
                     sourcemap: true,
-                    declaration : true
+                    declaration: true
                 }
             }
         },

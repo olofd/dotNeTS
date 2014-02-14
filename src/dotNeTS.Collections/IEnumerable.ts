@@ -10,7 +10,7 @@ module dotNeTS.Collections {
         SingleOrDefault(predicate?: IFunc<TSource, boolean>): TSource;
         Any(predicate?: IFunc<TSource, boolean>): boolean;
         Count(predicate?: IFunc<TSource, boolean>): number;
-        Select<TResult>(callback: IFunc<TSource, TResult>): dotNeTS.Collections.IEnumerable<TResult>;
+        Select<TResult>(callback: IFunc<TSource, TResult>): IEnumerable<TResult>;
         Where(predicate?: IFunc<TSource, boolean>): IEnumerable<TSource>;
         ToArray(): TSource[];
         ToList(): dotNeTS.Collections.Generic.List<TSource>;

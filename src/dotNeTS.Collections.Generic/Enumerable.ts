@@ -1,12 +1,15 @@
 /// <reference path="../../typings/lodash/lodash.d.ts" />
 'use strict'
 module dotNeTS.Collections.Generic {
-    export class Enumerable<TSource> implements dotNeTS.Collections.IEnumerable<TSource> {
+    export class Enumerable<TSource> implements IEnumerable<TSource>, IDisposable {
         public currentCollection: Array<TSource>;
         public getEvaluatedCollection() {
             return this.currentCollection;
         }
         get innerArray(): Array<TSource> {
+            if (!this.currentCollection) {
+                this.innerArray = new Array<TSource>();
+            }
             return this.getEvaluatedCollection();
         }
         set innerArray(innerArray: Array<TSource>) {
@@ -14,10 +17,14 @@ module dotNeTS.Collections.Generic {
         }
 
         constructor(innerArray?: Array<TSource>) {
-            this.innerArray = innerArray || new Array<TSource>();
+            this.innerArray = innerArray;;
 
         }
+
         ElementAt(index: number): TSource {
+            if (index >= this.Count()) {
+                throw new ArgumentOutOfRangeException("Index was out of range. Must be non-negative and less than the size of the collection.");
+            }
             return this.innerArray[index];
         }
         ElementAtOrDefault(index: number): TSource {
@@ -65,12 +72,10 @@ module dotNeTS.Collections.Generic {
             }
             return this.innerArray[0] || null;
         }
-
         Single(predicate?: IFunc<TSource, boolean>): TSource {
             if (!this.Any()) {
                 throw new InvalidOperationException("Sequence contains no elements");
             }
-
             if (predicate) {
                 var elements = _.where(this.innerArray, predicate);
                 var count = elements.length;
@@ -123,7 +128,7 @@ module dotNeTS.Collections.Generic {
             return this.innerArray.length;
         }
 
-        Select<TResult>(callback: IFunc<TSource, TResult>): dotNeTS.Collections.IEnumerable<TResult> {
+        Select<TResult>(callback: IFunc<TSource, TResult>): IEnumerable<TResult> {
             return new Enumerable<TResult>(_.map(this.innerArray, callback));
         }
 
@@ -131,12 +136,16 @@ module dotNeTS.Collections.Generic {
             return new Enumerable(_.where(this.innerArray, predicate));
         }
 
-        ToArray() : TSource[] {
+        ToArray(): TSource[] {
             return this.innerArray;
         }
 
-        ToList() : dotNeTS.Collections.Generic.List<TSource> {
+        ToList(): dotNeTS.Collections.Generic.List<TSource> {
             return new List<TSource>(this.innerArray);
+        }
+
+        Dispose() {
+            delete this.currentCollection;
         }
 
     }

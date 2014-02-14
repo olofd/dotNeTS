@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 var List = dotNeTS.Collections.Generic.List;
 
 function GetUser() {
@@ -72,6 +72,7 @@ describe('Test of List-implementation', function () {
         list.Add(testUser);
         expect(list.innerArray.length).toBe(2);
     });
+
     it('Add constructor', function () {
         var users = GetUsers();
         var list = new List(users);
@@ -84,6 +85,24 @@ describe('Test of List-implementation', function () {
         list.Add(testUser);
         expect(list.innerArray.length).toBe(1);
         list.Remove(testUser);
+        expect(list.innerArray.length).toBe(0);
+    });
+    it('Add range', function () {
+        var testUser = GetUser();
+        var list = new List();
+        list.Add(testUser);
+        list.Add(testUser);
+        list.AddRange(getFilledList());
+        expect(list.innerArray.length).toBe(5);
+    });
+    it('Dispose List', function () {
+        var testUser = GetUser();
+        var list = new List();
+        list.Add(testUser);
+        list.Add(testUser);
+        list.AddRange(getFilledList());
+        expect(list.innerArray.length).toBe(5);
+        list.Dispose();
         expect(list.innerArray.length).toBe(0);
     });
     it('Count three elements and one with predicate', function () {
@@ -240,12 +259,16 @@ describe('Test of List-implementation', function () {
         });
         expect(orderTestList.First().firstName).toBe("Olof");
     });
-    //it('ElementAt', function () {
-    //    var list = getFilledList();
-    //    expect(list.ElementAt).toBeDefined();
-    //    expect(list.ElementAtOrDefault).toBeDefined();
-    //    expect(list.ElementAt(0)).toBeDefined();
-    //    expect(list.ElementAt(3)).toThrow();
-    //});
+
+    it('ElementAt', function () {
+        var list = getFilledList();
+        expect(list.ElementAt).toBeDefined();
+        expect(list.ElementAtOrDefault).toBeDefined();
+        expect(list.ElementAt(0)).toBeDefined();
+        expect(list.ElementAt(2)).toBeDefined();
+        expect(function () {
+            list.ElementAt(3);
+        }).toThrow("Index was out of range. Must be non-negative and less than the size of the collection.");
+    });
 });
 //# sourceMappingURL=List-Test.js.map
