@@ -1,4 +1,4 @@
-/// <reference path="../../typings/lodash/lodash.d.ts" />
+﻿/// <reference path="../../typings/lodash/lodash.d.ts" />
 'use strict';
 var dotNeTS;
 (function (dotNeTS) {
@@ -8,12 +8,12 @@ var dotNeTS;
                 function Enumerable(innerArray) {
                     this.innerArray = innerArray || new Array();
                 }
-                Enumerable.prototype.getCollection = function () {
+                Enumerable.prototype.getEvaluatedCollection = function () {
                     return this.currentCollection;
                 };
                 Object.defineProperty(Enumerable.prototype, "innerArray", {
                     get: function () {
-                        return this.getCollection();
+                        return this.getEvaluatedCollection();
                     },
                     set: function (innerArray) {
                         this.currentCollection = innerArray;

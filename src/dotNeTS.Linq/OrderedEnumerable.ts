@@ -1,17 +1,17 @@
-module dotNeTS.Linq{
-    export class OrderedEnumerable<TSource> extends dotNeTS.Collections.Generic.Enumerable<TSource>{
+module dotNeTS.Linq {
+    export class OrderedEnumerable<TSource> extends dotNeTS.Collections.Generic.Enumerable<TSource> implements IOrderedEnumerable<TSource>{
         constructor(parent: dotNeTS.Collections.Generic.Enumerable<TSource>) {
             super(parent.currentCollection);
 
         }
-        sortExpressions: Array<ISortExpression<TSource>>;
-        public getCollection(): TSource[] {
+        private sortExpressions: Array<ISortExpression<TSource>>;
+        public getEvaluatedCollection(): TSource[] {
             if (this.sortExpressions) {
                 return this.EvaluateOrderBy();
             }
             return this.currentCollection;
         }
-         AddLazyOrderInternal<TKey>(callback: IFunc<TSource, TKey>, sortOrder: SortOrder) {
+        private AddLazyOrderInternal<TKey>(callback: IFunc<TSource, TKey>, sortOrder: SortOrder) : void {
             if (!this.sortExpressions) {
                 this.sortExpressions = new Array<any>();
             }
@@ -22,7 +22,7 @@ module dotNeTS.Linq{
         }
         OrderBy<TKey>(keySelector: IFunc<TSource, TKey>): OrderedEnumerable<TSource> {
             this.sortExpressions = undefined;
-           this.AddLazyOrderInternal(keySelector, SortOrder.ASC);
+            this.AddLazyOrderInternal(keySelector, SortOrder.ASC);
             return this;
         }
         OrderByDecending<TSort>(callback: IFunc<TSource, TSort>): OrderedEnumerable<TSource> {

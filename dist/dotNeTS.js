@@ -28,12 +28,12 @@ var dotNeTS;
                 function Enumerable(innerArray) {
                     this.innerArray = innerArray || new Array();
                 }
-                Enumerable.prototype.getCollection = function () {
+                Enumerable.prototype.getEvaluatedCollection = function () {
                     return this.currentCollection;
                 };
                 Object.defineProperty(Enumerable.prototype, "innerArray", {
                     get: function () {
-                        return this.getCollection();
+                        return this.getEvaluatedCollection();
                     },
                     set: function (innerArray) {
                         this.currentCollection = innerArray;
@@ -208,7 +208,7 @@ var dotNeTS;
             function OrderedEnumerable(parent) {
                 _super.call(this, parent.currentCollection);
             }
-            OrderedEnumerable.prototype.getCollection = function () {
+            OrderedEnumerable.prototype.getEvaluatedCollection = function () {
                 if (this.sortExpressions) {
                     return this.EvaluateOrderBy();
                 }

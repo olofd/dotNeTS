@@ -12,7 +12,7 @@ var dotNeTS;
             function OrderedEnumerable(parent) {
                 _super.call(this, parent.currentCollection);
             }
-            OrderedEnumerable.prototype.getCollection = function () {
+            OrderedEnumerable.prototype.getEvaluatedCollection = function () {
                 if (this.sortExpressions) {
                     return this.EvaluateOrderBy();
                 }

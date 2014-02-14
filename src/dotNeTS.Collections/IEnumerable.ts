@@ -1,17 +1,18 @@
-//import List = require('./../dotNeTS.Collections.Generic/List')
-//interface IEnumerable<T> {
-//        First(predicate?: _.ListIterator<T, boolean>): T;
-//        FirstOrDefault(predicate?: _.ListIterator<T, boolean>): T;
-//        Single(predicate?: _.ListIterator<T, boolean>): T;
-//        SingleOrDefault(predicate?: _.ListIterator<T, boolean>): T;
-//        Select<TResult>(callback: _.ListIterator<T, TResult>): IEnumerable<TResult>;
-//        OrderBy<T>(whereValue) : void;
-//        Where(predicate?: _.ListIterator<T, boolean>): IEnumerable<T>;
-//        ToArray(): Array<T>;
-//        ToList(): List<T>;
-//        Any(predicate?: _.ListIterator<T, boolean>): boolean;
-//        Count(): number;
-//}
-
-//export = IEnumerable;
-
+module dotNeTS.Collections {
+    export interface IEnumerable<TSource> {
+        ForEach(callback: dotNeTS.IFunc<TSource, void>): void
+        Contains(item: TSource): boolean;
+        OrderBy<TKey>(keySelector: dotNeTS.IFunc<TSource, TKey>): dotNeTS.Linq.OrderedEnumerable<TSource>;
+        OrderByDecending<TKey>(callback: IFunc<TSource, TKey>): dotNeTS.Linq.OrderedEnumerable<TSource>;
+        First(predicate?: IFunc<TSource, boolean>): TSource;
+        FirstOrDefault(predicate?: IFunc<TSource, boolean>): TSource;
+        Single(predicate?: IFunc<TSource, boolean>): TSource;
+        SingleOrDefault(predicate?: IFunc<TSource, boolean>): TSource;
+        Any(predicate?: IFunc<TSource, boolean>): boolean;
+        Count(predicate?: IFunc<TSource, boolean>): number;
+        Select<TResult>(callback: IFunc<TSource, TResult>): dotNeTS.Collections.IEnumerable<TResult>;
+        Where(predicate?: IFunc<TSource, boolean>): IEnumerable<TSource>;
+        ToArray(): TSource[];
+        ToList(): dotNeTS.Collections.Generic.List<TSource>;
+    }
+}

@@ -1,13 +1,13 @@
 /// <reference path="../../typings/lodash/lodash.d.ts" />
 'use strict'
 module dotNeTS.Collections.Generic {
-    export class Enumerable<TSource> {
+    export class Enumerable<TSource> implements dotNeTS.Collections.IEnumerable<TSource> {
         public currentCollection: Array<TSource>;
-        public getCollection() {
+        public getEvaluatedCollection() {
             return this.currentCollection;
         }
         get innerArray(): Array<TSource> {
-            return this.getCollection();
+            return this.getEvaluatedCollection();
         }
         set innerArray(innerArray: Array<TSource>) {
             this.currentCollection = innerArray;
@@ -123,19 +123,19 @@ module dotNeTS.Collections.Generic {
             return this.innerArray.length;
         }
 
-        Select<TResult>(callback: IFunc<TSource, TResult>) {
+        Select<TResult>(callback: IFunc<TSource, TResult>): dotNeTS.Collections.IEnumerable<TResult> {
             return new Enumerable<TResult>(_.map(this.innerArray, callback));
         }
 
-        Where(predicate?: IFunc<TSource, boolean>): Enumerable<TSource> {
+        Where(predicate?: IFunc<TSource, boolean>): IEnumerable<TSource> {
             return new Enumerable(_.where(this.innerArray, predicate));
         }
 
-        ToArray() {
+        ToArray() : TSource[] {
             return this.innerArray;
         }
 
-        ToList() {
+        ToList() : dotNeTS.Collections.Generic.List<TSource> {
             return new List<TSource>(this.innerArray);
         }
 
