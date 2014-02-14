@@ -15,7 +15,4 @@ module dotNeTS {
         }
 
     }
-     
 }
-
-

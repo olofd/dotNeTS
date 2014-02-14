@@ -1,7 +1,7 @@
 var dotNeTS;
 (function (dotNeTS) {
     function createList(startArray) {
-        return new dotNeTS.List(startArray);
+        return new dotNeTS.Collections.Generic.List(startArray);
     }
     dotNeTS.createList = createList;
 })(dotNeTS || (dotNeTS = {}));

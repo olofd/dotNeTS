@@ -1,12 +1,8 @@
-
 module dotNeTS {
-
-    export class InvalidOperationException extends dotNeTS.Exception {
-
+    export class InvalidOperationException extends Exception {
         constructor(message: string) {
             super("InvalidOperationException", message);
         }
-
     }
 
 }

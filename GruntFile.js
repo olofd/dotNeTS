@@ -35,6 +35,7 @@ module.exports = function (grunt) {
             base: {
                 src: [
                     'bower_components/typings/lodash/lodash.ts',
+                    'src/dotNeTS/Exception.ts',
                     'src/**/*.ts'
                 ],
                 dest: 'dist/<%= pkg.name %>.js',
@@ -80,6 +81,7 @@ module.exports = function (grunt) {
 
     // Default task(s).
     grunt.registerTask('default', ['karma:src', 'typescript', 'uglify', 'karma:dist']);
+    grunt.registerTask('build', ['default']);
     grunt.registerTask('test', ['karma:dev']);
 
 

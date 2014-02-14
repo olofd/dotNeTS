@@ -6,7 +6,7 @@ module app {
     export class UserManager {
         constructor() {
             //Import namespace
-            var List = dotNeTS.List;
+            //var List = dotNeTS.List;
 
             //Random Data
             var user1: User = {
@@ -22,9 +22,9 @@ module app {
             var arrayOfUsers = [user1, user2];
 
             //Create List<User>
-            var myList = new List<User>(arrayOfUsers);
-            var userNameArray = myList.Where(b=> b.id === 1).Select(b=> b.username).ToArray();
-            console.log(userNameArray);
+            //var myList = new List<User>(arrayOfUsers);
+            //var userNameArray = myList.Where(b=> b.id === 1).Select(b=> b.username).ToArray();
+            //console.log(userNameArray);
             //=> ['olofd']
         }
     }

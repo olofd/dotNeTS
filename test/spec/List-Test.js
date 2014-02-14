@@ -1,4 +1,6 @@
-'use strict';
+﻿'use strict';
+var List = dotNeTS.Collections.Generic.List;
+
 function GetUser() {
     return GetUsers()[0];
 }
@@ -34,14 +36,18 @@ function GetUsers() {
 describe('Test of List-implementation', function () {
     var getFilledList = function () {
         var users = GetUsers();
-        var list = new dotNeTS.List();
+        var list = new List();
         list.Add(users[0]);
         list.Add(users[1]);
         list.Add(users[2]);
         return list;
     };
-    it('Should excist in namespace', function () {
-        var list = new dotNeTS.List();
+    it('Test accessability', function () {
+        expect(dotNeTS.createList).toBeDefined();
+        var list = dotNeTS.createList();
+        expect(list).toBeDefined();
+        expect(dotNeTS).toBeDefined();
+        var list = new List();
         expect(list).toBeDefined();
     });
     it('Should be able to get test data', function () {
@@ -49,31 +55,31 @@ describe('Test of List-implementation', function () {
         expect(GetUser()).toBeDefined();
     });
     it('Add defined', function () {
-        var list = new dotNeTS.List();
+        var list = new List();
         expect(list.Add).toBeDefined();
     });
     it('Add one', function () {
         var testUser = GetUser();
-        var list = new dotNeTS.List();
+        var list = new List();
         expect(list.Add).toBeDefined();
         list.Add(testUser);
         expect(list.innerArray.length).toBe(1);
     });
     it('Add two', function () {
         var testUser = GetUser();
-        var list = new dotNeTS.List();
+        var list = new List();
         list.Add(testUser);
         list.Add(testUser);
         expect(list.innerArray.length).toBe(2);
     });
     it('Add constructor', function () {
         var users = GetUsers();
-        var list = new dotNeTS.List(users);
+        var list = new List(users);
         expect(list.innerArray.length).toBe(3);
     });
     it('Add one Remove one', function () {
         var testUser = GetUser();
-        var list = new dotNeTS.List();
+        var list = new List();
         expect(list.Add).toBeDefined();
         list.Add(testUser);
         expect(list.innerArray.length).toBe(1);
@@ -110,7 +116,7 @@ describe('Test of List-implementation', function () {
         var user = list.FirstOrDefault();
         expect(user).toBeDefined();
         expect(user.id).toBe(1);
-        list = new dotNeTS.List();
+        list = new List();
         expect(list.FirstOrDefault()).toBe(null);
     });
     it('FirstOrDefault with predicate', function () {
@@ -132,12 +138,12 @@ describe('Test of List-implementation', function () {
         expect(user.id).toBe(1);
     });
     it('First all exceptions', function () {
-        var list = new dotNeTS.List();
+        var list = new List();
         expect(function () {
             list.First();
         }).toThrow("Sequence contains no elements");
 
-        var list = new dotNeTS.List();
+        var list = new List();
         list.Add(GetUser());
         expect(function () {
             list.First(function (b) {
@@ -160,7 +166,7 @@ describe('Test of List-implementation', function () {
         }).toThrow();
     });
     it('Single without predicate', function () {
-        var users = new dotNeTS.List([GetUser()]);
+        var users = new List([GetUser()]);
         var user = users.Single();
         expect(user).toBeDefined();
         var list = getFilledList();
@@ -209,18 +215,37 @@ describe('Test of List-implementation', function () {
     it('OrderBy', function () {
         var list = getFilledList();
         expect(list.OrderBy).toBeDefined();
-        var firstNameOrder = list.OrderByDecending(function (b) {
+
+        //OrderBy
+        var orderTestList = list.OrderBy(function (b) {
             return b.age;
         });
-        var nameThenAge = firstNameOrder.ThenBy(function (b) {
+        expect(orderTestList.First().age).toBe(26);
+
+        //OrderByDecending
+        orderTestList = list.OrderByDecending(function (b) {
+            return b.age;
+        });
+        expect(orderTestList.First().age).toBe(28);
+
+        //ThenBy
+        var newOrderedList = orderTestList.ThenBy(function (b) {
             return b.firstName;
         });
-        _.map(nameThenAge.sortExpressions, function (e) {
-            console.log(e);
+        expect(newOrderedList.First().firstName).toBe("Magnus");
+
+        //ThenByDecending
+        orderTestList = orderTestList.ThenByDecending(function (b) {
+            return b.firstName;
         });
-        var list = nameThenAge.ToList();
-        console.log(list.First());
-        //var first = nameThenAge.Count();
+        expect(orderTestList.First().firstName).toBe("Olof");
     });
+    //it('ElementAt', function () {
+    //    var list = getFilledList();
+    //    expect(list.ElementAt).toBeDefined();
+    //    expect(list.ElementAtOrDefault).toBeDefined();
+    //    expect(list.ElementAt(0)).toBeDefined();
+    //    expect(list.ElementAt(3)).toThrow();
+    //});
 });
-//# sourceMappingURL=List.js.map
+//# sourceMappingURL=List-Test.js.map

@@ -1,13 +1,14 @@
 // Karma configuration
 // Generated on Mon Feb 10 2014 23:14:46 GMT+0100 (W. Europe Standard Time)
 
+
 module.exports = function(config) {
   config.set({
     basePath: '',
-    frameworks: ['jasmine'],
+    frameworks :['jasmine'],
     files: [
       'bower_components/lodash/dist/lodash.js',
-      'src/**/*.js',
+      'dist/dotNeTS.js',
       'test/spec/**/*.js'
     ],
     exclude: [

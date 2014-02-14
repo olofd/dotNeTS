@@ -3,8 +3,7 @@ var app;
     var UserManager = (function () {
         function UserManager() {
             //Import namespace
-            var List = dotNeTS.List;
-
+            //var List = dotNeTS.List;
             //Random Data
             var user1 = {
                 id: 1,
@@ -17,15 +16,10 @@ var app;
 
             //Regular javascript array;
             var arrayOfUsers = [user1, user2];
-
             //Create List<User>
-            var myList = new List(arrayOfUsers);
-            var userNameArray = myList.Where(function (b) {
-                return b.id === 1;
-            }).Select(function (b) {
-                return b.username;
-            }).ToArray();
-            console.log(userNameArray);
+            //var myList = new List<User>(arrayOfUsers);
+            //var userNameArray = myList.Where(b=> b.id === 1).Select(b=> b.username).ToArray();
+            //console.log(userNameArray);
             //=> ['olofd']
         }
         return UserManager;
