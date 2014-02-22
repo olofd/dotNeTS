@@ -1,4 +1,4 @@
-module dotNeTS.Linq {
+module dotNeTS {
     export interface IOrderedEnumerable<TSource> {
         OrderBy<TKey>(keySelector: IFunc<TSource, TKey>): OrderedEnumerable<TSource>;
         OrderByDecending<TSort>(callback: IFunc<TSource, TSort>): OrderedEnumerable<TSource>;

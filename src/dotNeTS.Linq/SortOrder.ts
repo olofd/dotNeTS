@@ -1,4 +1,4 @@
-module dotNeTS.Linq {
+module dotNeTS {
     export enum SortOrder {
         ASC,
         DESC

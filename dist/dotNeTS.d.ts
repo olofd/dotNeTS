@@ -10,10 +10,10 @@ declare module dotNeTS {
     }
 }
 declare module dotNeTS {
-    function createList<T>(startArray?: T[]): Collections.Generic.List<T>;
+    function createList<T>(startArray?: T[]): List<T>;
 }
-declare module dotNeTS.Collections.Generic {
-    class Enumerable<TSource> implements Collections.IEnumerable<TSource>, dotNeTS.IDisposable {
+declare module dotNeTS {
+    class Enumerable<TSource> implements dotNeTS.IEnumerable<TSource>, dotNeTS.IDisposable {
         public currentCollection: TSource[];
         public getEvaluatedCollection(): TSource[];
         public innerArray : TSource[];
@@ -22,27 +22,28 @@ declare module dotNeTS.Collections.Generic {
         public ElementAtOrDefault(index: number): TSource;
         public ForEach(callback: dotNeTS.IFunc<TSource, void>): void;
         public Contains(item: TSource): boolean;
-        public OrderBy<TKey>(keySelector: dotNeTS.IFunc<TSource, TKey>): dotNeTS.Linq.OrderedEnumerable<TSource>;
-        public OrderByDecending<TKey>(callback: dotNeTS.IFunc<TSource, TKey>): dotNeTS.Linq.OrderedEnumerable<TSource>;
+        public OrderBy<TKey>(keySelector: dotNeTS.IFunc<TSource, TKey>): dotNeTS.OrderedEnumerable<TSource>;
+        public OrderByDecending<TKey>(callback: dotNeTS.IFunc<TSource, TKey>): dotNeTS.OrderedEnumerable<TSource>;
         public First(predicate?: dotNeTS.IFunc<TSource, boolean>): TSource;
         public FirstOrDefault(predicate?: dotNeTS.IFunc<TSource, boolean>): TSource;
         public Single(predicate?: dotNeTS.IFunc<TSource, boolean>): TSource;
         public SingleOrDefault(predicate?: dotNeTS.IFunc<TSource, boolean>): TSource;
         public Any(predicate?: dotNeTS.IFunc<TSource, boolean>): boolean;
         public Count(predicate?: dotNeTS.IFunc<TSource, boolean>): number;
-        public Select<TResult>(callback: dotNeTS.IFunc<TSource, TResult>): Collections.IEnumerable<TResult>;
-        public Where(predicate?: dotNeTS.IFunc<TSource, boolean>): Collections.IEnumerable<TSource>;
+        public Select<TResult>(callback: dotNeTS.IFunc<TSource, TResult>): dotNeTS.IEnumerable<TResult>;
+        public Where(predicate?: dotNeTS.IFunc<TSource, boolean>): dotNeTS.IEnumerable<TSource>;
         public ToArray(): TSource[];
-        public ToList(): Generic.List<TSource>;
+        public ToList(): dotNeTS.List<TSource>;
         public Dispose(): void;
     }
 }
-declare module dotNeTS.Collections.Generic {
-    class List<TSource> extends Generic.Enumerable<TSource> implements Collections.IList<TSource>, dotNeTS.IDisposable {
+declare module dotNeTS {
+    class List<TSource> extends dotNeTS.Enumerable<TSource> implements dotNeTS.IList<TSource>, dotNeTS.IDisposable {
         constructor(innerArray?: TSource[]);
         public Add(item: TSource): void;
-        public AddRange(collection: Collections.IEnumerable<TSource>): void;
+        public AddRange(collection: dotNeTS.IEnumerable<TSource>): void;
         public Remove(item: TSource): void;
+        public ReplaceWith(replaceItem: TSource, whereSelector: dotNeTS.IComparer<TSource, boolean>): void;
         public RemoveAt(index: number): void;
         public Clear(): void;
         public IndexOf(item: TSource): number;
@@ -50,12 +51,12 @@ declare module dotNeTS.Collections.Generic {
         public Dispose(): void;
     }
 }
-declare module dotNeTS.Collections {
+declare module dotNeTS {
     interface IEnumerable<TSource> {
         ForEach(callback: dotNeTS.IFunc<TSource, void>): void;
         Contains(item: TSource): boolean;
-        OrderBy<TKey>(keySelector: dotNeTS.IFunc<TSource, TKey>): dotNeTS.Linq.OrderedEnumerable<TSource>;
-        OrderByDecending<TKey>(callback: dotNeTS.IFunc<TSource, TKey>): dotNeTS.Linq.OrderedEnumerable<TSource>;
+        OrderBy<TKey>(keySelector: dotNeTS.IFunc<TSource, TKey>): dotNeTS.OrderedEnumerable<TSource>;
+        OrderByDecending<TKey>(callback: dotNeTS.IFunc<TSource, TKey>): dotNeTS.OrderedEnumerable<TSource>;
         First(predicate?: dotNeTS.IFunc<TSource, boolean>): TSource;
         FirstOrDefault(predicate?: dotNeTS.IFunc<TSource, boolean>): TSource;
         Single(predicate?: dotNeTS.IFunc<TSource, boolean>): TSource;
@@ -65,13 +66,13 @@ declare module dotNeTS.Collections {
         Select<TResult>(callback: dotNeTS.IFunc<TSource, TResult>): IEnumerable<TResult>;
         Where(predicate?: dotNeTS.IFunc<TSource, boolean>): IEnumerable<TSource>;
         ToArray(): TSource[];
-        ToList(): Collections.Generic.List<TSource>;
+        ToList(): dotNeTS.List<TSource>;
     }
 }
-declare module dotNeTS.Collections {
+declare module dotNeTS {
     interface IList<TSource> {
         Add(item: TSource): void;
-        AddRange(collection: Collections.IEnumerable<TSource>): void;
+        AddRange(collection: dotNeTS.IEnumerable<TSource>): void;
         Remove(item: TSource): void;
         RemoveAt(index: number): any;
         Clear(): void;
@@ -80,23 +81,23 @@ declare module dotNeTS.Collections {
         Insert(index: number, item: TSource): void;
     }
 }
-declare module dotNeTS.Linq {
+declare module dotNeTS {
     interface IOrderedEnumerable<TSource> {
-        OrderBy<TKey>(keySelector: dotNeTS.IFunc<TSource, TKey>): Linq.OrderedEnumerable<TSource>;
-        OrderByDecending<TSort>(callback: dotNeTS.IFunc<TSource, TSort>): Linq.OrderedEnumerable<TSource>;
-        ThenBy<TSort>(callback: dotNeTS.IFunc<TSource, TSort>): Linq.OrderedEnumerable<TSource>;
-        ThenByDecending<TSort>(callback: dotNeTS.IFunc<TSource, TSort>): Linq.OrderedEnumerable<TSource>;
+        OrderBy<TKey>(keySelector: dotNeTS.IFunc<TSource, TKey>): dotNeTS.OrderedEnumerable<TSource>;
+        OrderByDecending<TSort>(callback: dotNeTS.IFunc<TSource, TSort>): dotNeTS.OrderedEnumerable<TSource>;
+        ThenBy<TSort>(callback: dotNeTS.IFunc<TSource, TSort>): dotNeTS.OrderedEnumerable<TSource>;
+        ThenByDecending<TSort>(callback: dotNeTS.IFunc<TSource, TSort>): dotNeTS.OrderedEnumerable<TSource>;
     }
 }
-declare module dotNeTS.Linq {
+declare module dotNeTS {
     interface ISortExpression<TSource> {
-        sortOrder: Linq.SortOrder;
+        sortOrder: dotNeTS.SortOrder;
         expression: dotNeTS.IFunc<TSource, any>;
     }
 }
-declare module dotNeTS.Linq {
-    class OrderedEnumerable<TSource> extends dotNeTS.Collections.Generic.Enumerable<TSource> implements Linq.IOrderedEnumerable<TSource> {
-        constructor(parent: dotNeTS.Collections.Generic.Enumerable<TSource>);
+declare module dotNeTS {
+    class OrderedEnumerable<TSource> extends dotNeTS.Enumerable<TSource> implements dotNeTS.IOrderedEnumerable<TSource> {
+        constructor(parent: dotNeTS.Enumerable<TSource>);
         private sortExpressions;
         public getEvaluatedCollection(): TSource[];
         private AddLazyOrderInternal<TKey>(callback, sortOrder);
@@ -108,7 +109,7 @@ declare module dotNeTS.Linq {
         public Dispose(): void;
     }
 }
-declare module dotNeTS.Linq {
+declare module dotNeTS {
     enum SortOrder {
         ASC = 0,
         DESC = 1,
@@ -127,6 +128,9 @@ declare module dotNeTS {
 declare module dotNeTS {
     interface IFunc<T, TResult> {
         (value: T, index: number, list: T[]): TResult;
+    }
+    interface IComparer<T, TResult> {
+        (newValue: T, oldvalue: T, index: number, list: T[]): TResult;
     }
 }
 declare module dotNeTS {

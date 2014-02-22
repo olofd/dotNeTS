@@ -1,1 +1,1 @@
-{"version":3,"file":"SortOrder.js","sourceRoot":"","sources":["SortOrder.ts"],"names":["dotNeTS","dotNeTS.Linq","dotNeTS.Linq.SortOrder"],"mappings":"AAAA,IAAO,OAAO;AAKb,CALD,UAAO,OAAO;KAAdA,UAAeA,IAAIA;SACfC,UAAYA,SAASA;YACjBC,uCAAGA;YACHA,yCAAIA;oDACPD;uCAAAA;IACLA,CAACA,uCAAAD;4BAAAA;AAADA,CAACA,6BAAA"}
+{"version":3,"file":"SortOrder.js","sourceRoot":"","sources":["SortOrder.ts"],"names":["dotNeTS","dotNeTS.SortOrder"],"mappings":"AAAA,IAAO,OAAO;AAKb,CALD,UAAO,OAAO;KACVA,UAAYA,SAASA;QACjBC,uCAAGA;QACHA,yCAAIA;sDACPD;sCAAAA;AACLA,CAACA,6BAAA"}

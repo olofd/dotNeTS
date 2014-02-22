@@ -1,5 +1,5 @@
 'use strict';
-var List = dotNeTS.Collections.Generic.List;
+var List = dotNeTS.List;
 
 function GetUser() {
     return GetUsers()[0];
@@ -45,6 +45,7 @@ describe('Test of List-implementation', function () {
     it('Test accessability', function () {
         expect(dotNeTS.createList).toBeDefined();
         var list = dotNeTS.createList();
+
         expect(list).toBeDefined();
         expect(dotNeTS).toBeDefined();
         var list = new List();
@@ -269,6 +270,24 @@ describe('Test of List-implementation', function () {
         expect(function () {
             list.ElementAt(3);
         }).toThrow("Index was out of range. Must be non-negative and less than the size of the collection.");
+    });
+
+    it('Update', function () {
+        var list = getFilledList();
+
+        list.ReplaceWith({
+            id: 1,
+            userName: "maria",
+            firstName: "Maria",
+            lastName: "Fredriksson",
+            age: 32
+        }, function (newVal, oldVal) {
+            return newVal.id === oldVal.id;
+        });
+        var idOne = list.FirstOrDefault(function (b) {
+            return b.id === 1;
+        }).userName;
+        expect(idOne).toBe('maria');
     });
 });
 //# sourceMappingURL=List-Test.js.map

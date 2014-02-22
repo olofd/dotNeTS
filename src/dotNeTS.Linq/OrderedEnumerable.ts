@@ -1,6 +1,6 @@
-module dotNeTS.Linq {
-    export class OrderedEnumerable<TSource> extends dotNeTS.Collections.Generic.Enumerable<TSource> implements IOrderedEnumerable<TSource>{
-        constructor(parent: dotNeTS.Collections.Generic.Enumerable<TSource>) {
+module dotNeTS {
+    export class OrderedEnumerable<TSource> extends dotNeTS.Enumerable<TSource> implements IOrderedEnumerable<TSource>{
+        constructor(parent: dotNeTS.Enumerable<TSource>) {
             super(parent.currentCollection);
 
         }

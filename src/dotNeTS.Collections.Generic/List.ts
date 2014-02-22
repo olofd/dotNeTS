@@ -1,4 +1,4 @@
-module dotNeTS.Collections.Generic {
+module dotNeTS {
     export class List<TSource> extends Enumerable<TSource> implements IList<TSource>, IDisposable {
         constructor(innerArray?: Array<TSource>) {
             super(innerArray);
@@ -12,17 +12,29 @@ module dotNeTS.Collections.Generic {
         Remove(item: TSource): void {
             this.innerArray = _.without(this.innerArray, item);
         }
+        ReplaceWith(replaceItem: TSource, whereSelector: dotNeTS.IComparer<TSource, boolean>) {
+            var valuesToUpdate = _.where(this.innerArray,
+                (value: TSource, index: number, list: TSource[]) => {
+                    return whereSelector(replaceItem, value, index, list);
+                });
+            _.forEach(valuesToUpdate, (value) => {
+                var index = this.IndexOf(value)
+                if (index !== -1) {
+                    this.innerArray[index] = replaceItem;
+                }
+            });
+        }
         RemoveAt(index: number) {
 
-        }
+        } 
         Clear(): void {
 
         }
 
         IndexOf(item: TSource): number {
-            return 1;
+            return this.innerArray.indexOf(item);
         }
-        Insert(index: number, item: TSource) : void {
+        Insert(index: number, item: TSource): void {
 
         }
         Dispose() {

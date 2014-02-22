@@ -1,6 +1,6 @@
 'use strict';
 
-var List = dotNeTS.Collections.Generic.List; 
+var List = dotNeTS.List;
 interface User {
     id: number;
     userName: string;
@@ -14,11 +14,11 @@ function GetUser(): User {
 
 function GetUsers(): User[] {
     var userOne: User = {
-        id : 1,
-        userName : "olofd",
-        firstName : "Olof",
-        lastName : "Dahlbom",
-        age : 28
+        id: 1,
+        userName: "olofd",
+        firstName: "Olof",
+        lastName: "Dahlbom",
+        age: 28
     };
 
     var userTwo: User = {
@@ -52,6 +52,7 @@ describe('Test of List-implementation', function () {
     it('Test accessability', function () {
         expect(dotNeTS.createList).toBeDefined();
         var list = dotNeTS.createList();
+
         expect(list).toBeDefined();
         expect(dotNeTS).toBeDefined();
         var list = new List();
@@ -79,7 +80,7 @@ describe('Test of List-implementation', function () {
         list.Add(testUser);
         list.Add(testUser);
         expect(list.innerArray.length).toBe(2);
-         
+
     });
 
     it('Add constructor', function () {
@@ -111,7 +112,7 @@ describe('Test of List-implementation', function () {
         list.Add(testUser);
         list.Add(testUser);
         list.AddRange(getFilledList());
-        expect(list.innerArray.length).toBe(5); 
+        expect(list.innerArray.length).toBe(5);
         list.Dispose();
         expect(list.innerArray.length).toBe(0);
 
@@ -139,7 +140,7 @@ describe('Test of List-implementation', function () {
     it('FirstOrDefault without predicate', function () {
         var list = getFilledList();
         var user = list.FirstOrDefault();
-        expect(user).toBeDefined();  
+        expect(user).toBeDefined();
         expect(user.id).toBe(1);
         list = new List<User>();
         expect(list.FirstOrDefault()).toBe(null);
@@ -162,7 +163,7 @@ describe('Test of List-implementation', function () {
     it('First all exceptions', function () {
         var list = new List<User>();
         expect(function () {
-            list.First(); 
+            list.First();
         }).toThrow("Sequence contains no elements");
 
         var list = new List<User>();
@@ -186,7 +187,7 @@ describe('Test of List-implementation', function () {
         var user = users.Single();
         expect(user).toBeDefined();
         var list = getFilledList();
-        expect(function () { list.Single(); }).toThrow(); 
+        expect(function () { list.Single(); }).toThrow();
     });
     it('Single with predicate', function () {
         var list = getFilledList();
@@ -194,18 +195,18 @@ describe('Test of List-implementation', function () {
         expect(user).toBeDefined();
         expect(user.userName).toBe("ludde");
         expect(function () {
-            list.Single(b => b.age === 28); 
+            list.Single(b => b.age === 28);
         }).toThrow();
     });
 
-    it('Select one element', function() {
-        var list = getFilledList(); 
-        var newUsers = list.Select(b=> <User>{id : ++b.id, userName : b.userName});
-        var fistUser = newUsers.FirstOrDefault(); 
+    it('Select one element', function () {
+        var list = getFilledList();
+        var newUsers = list.Select(b=> <User>{ id: ++b.id, userName: b.userName });
+        var fistUser = newUsers.FirstOrDefault();
         expect(fistUser.id).toBe(2);
         expect(fistUser.age).toBeUndefined();
     });
-    it('Contains', function() {
+    it('Contains', function () {
         var list = getFilledList();
         expect(list.Contains).toBeDefined();
         expect(list.Contains(list.FirstOrDefault())).toBeTruthy();
@@ -254,6 +255,20 @@ describe('Test of List-implementation', function () {
 
     });
 
+    it('Update', function () {
+        var list = getFilledList();
+
+        list.ReplaceWith((<User>{
+            id: 1,
+            userName: "maria",
+            firstName: "Maria",
+            lastName: "Fredriksson",
+            age: 32
+        }), (newVal, oldVal) => newVal.id === oldVal.id);
+        var idOne = list.FirstOrDefault(b => b.id === 1).userName;
+        expect(idOne).toBe('maria');
+
+    });
+
 
 });
-  

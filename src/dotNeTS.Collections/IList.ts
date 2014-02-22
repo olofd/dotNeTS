@@ -1,4 +1,4 @@
-module dotNeTS.Collections {
+module dotNeTS {
     export interface IList<TSource> {
         Add(item: TSource): void;
         AddRange(collection: IEnumerable<TSource>): void;

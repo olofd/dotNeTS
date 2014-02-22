@@ -1,9 +1,9 @@
-module dotNeTS.Collections {
+module dotNeTS {
     export interface IEnumerable<TSource> {
         ForEach(callback: dotNeTS.IFunc<TSource, void>): void
         Contains(item: TSource): boolean;
-        OrderBy<TKey>(keySelector: dotNeTS.IFunc<TSource, TKey>): dotNeTS.Linq.OrderedEnumerable<TSource>;
-        OrderByDecending<TKey>(callback: IFunc<TSource, TKey>): dotNeTS.Linq.OrderedEnumerable<TSource>;
+        OrderBy<TKey>(keySelector: dotNeTS.IFunc<TSource, TKey>): dotNeTS.OrderedEnumerable<TSource>;
+        OrderByDecending<TKey>(callback: IFunc<TSource, TKey>): dotNeTS.OrderedEnumerable<TSource>;
         First(predicate?: IFunc<TSource, boolean>): TSource;
         FirstOrDefault(predicate?: IFunc<TSource, boolean>): TSource;
         Single(predicate?: IFunc<TSource, boolean>): TSource;
@@ -13,6 +13,6 @@ module dotNeTS.Collections {
         Select<TResult>(callback: IFunc<TSource, TResult>): IEnumerable<TResult>;
         Where(predicate?: IFunc<TSource, boolean>): IEnumerable<TSource>;
         ToArray(): TSource[];
-        ToList(): dotNeTS.Collections.Generic.List<TSource>;
+        ToList(): dotNeTS.List<TSource>;
     }
 }

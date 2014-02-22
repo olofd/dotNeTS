@@ -1,6 +1,6 @@
 /// <reference path="../../typings/lodash/lodash.d.ts" />
 'use strict'
-module dotNeTS.Collections.Generic {
+module dotNeTS {
     export class Enumerable<TSource> implements IEnumerable<TSource>, IDisposable {
         public currentCollection: Array<TSource>;
         public getEvaluatedCollection() {
@@ -17,7 +17,7 @@ module dotNeTS.Collections.Generic {
         }
 
         constructor(innerArray?: Array<TSource>) {
-            this.innerArray = innerArray;;
+            this.innerArray = innerArray;
 
         }
 
@@ -40,13 +40,13 @@ module dotNeTS.Collections.Generic {
         Contains(item: TSource): boolean {
             return _.contains(this.innerArray, item);
         }
-        OrderBy<TKey>(keySelector: dotNeTS.IFunc<TSource, TKey>): dotNeTS.Linq.OrderedEnumerable<TSource> {
-            var ordered = new dotNeTS.Linq.OrderedEnumerable(this);
+        OrderBy<TKey>(keySelector: dotNeTS.IFunc<TSource, TKey>): dotNeTS.OrderedEnumerable<TSource> {
+            var ordered = new dotNeTS.OrderedEnumerable(this);
             return ordered.OrderBy(keySelector);
         }
 
-        OrderByDecending<TKey>(callback: IFunc<TSource, TKey>): dotNeTS.Linq.OrderedEnumerable<TSource> {
-            var ordered = new dotNeTS.Linq.OrderedEnumerable(this);
+        OrderByDecending<TKey>(callback: IFunc<TSource, TKey>): dotNeTS.OrderedEnumerable<TSource> {
+            var ordered = new dotNeTS.OrderedEnumerable(this);
             return ordered.OrderByDecending(callback);
         }
         First(predicate?: IFunc<TSource, boolean>): TSource {
@@ -140,7 +140,7 @@ module dotNeTS.Collections.Generic {
             return this.innerArray;
         }
 
-        ToList(): dotNeTS.Collections.Generic.List<TSource> {
+        ToList(): dotNeTS.List<TSource> {
             return new List<TSource>(this.innerArray);
         }
 
