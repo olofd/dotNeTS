@@ -1,5 +1,5 @@
 module dotNeTS {
-    export interface IList<TSource> {
+    export interface IList<TSource> extends IEnumerable<TSource>{
         Add(item: TSource): void;
         AddRange(collection: IEnumerable<TSource>): void;
         Remove(item: TSource): void;

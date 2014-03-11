@@ -1,9 +1,10 @@
 module dotNeTS {
-    export interface IEnumerable<TSource> {
+    export interface IEnumerable<TSource> extends IDisposable {
         ForEach(callback: dotNeTS.IFunc<TSource, void>): void
         Contains(item: TSource): boolean;
-        OrderBy<TKey>(keySelector: dotNeTS.IFunc<TSource, TKey>): dotNeTS.OrderedEnumerable<TSource>;
-        OrderByDecending<TKey>(callback: IFunc<TSource, TKey>): dotNeTS.OrderedEnumerable<TSource>;
+        GroupBy<TResult>(callback: IFunc<TSource, TResult>): IEnumerable<IGrouping<TResult, TSource>>;
+        OrderBy<TKey>(keySelector: dotNeTS.IFunc<TSource, TKey>): IOrderedEnumerable<TSource>;
+        OrderByDecending<TKey>(callback: IFunc<TSource, TKey>): IOrderedEnumerable<TSource>;
         First(predicate?: IFunc<TSource, boolean>): TSource;
         FirstOrDefault(predicate?: IFunc<TSource, boolean>): TSource;
         Single(predicate?: IFunc<TSource, boolean>): TSource;

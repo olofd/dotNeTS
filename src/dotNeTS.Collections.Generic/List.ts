@@ -1,5 +1,5 @@
 module dotNeTS {
-    export class List<TSource> extends Enumerable<TSource> implements IList<TSource>, IDisposable {
+    export class List<TSource> extends Enumerable<TSource> implements IList<TSource>, IEnumerable<TSource>, IDisposable {
         constructor(innerArray?: Array<TSource>) {
             super(innerArray);
         }

@@ -1,1 +1,1 @@
-{"version":3,"file":"IGrouping.js","sourceRoot":"","sources":["IGrouping.ts"],"names":["dotNeTS","dotNeTS.Grouping","dotNeTS.Grouping.constructor"],"mappings":";;;;;;AAAA,IAAO,OAAO;AAMb,CAND,UAAO,OAAO;IACVA;QAA8CC,2BAAcA;QACxDA,kBAAYA,GAAgBA,EAAEA,UAAsBA;YAChDC,WAAMA,OAAAA,UAAUA,CAACA;YADTA,QAAUA,GAAHA,GAAGA;AAAMA,QAE5BA,CAACA;QACLD,gBAACA;IAADA,CAACA,EAJ6CD,YAAIA,EAIjDA;IAJDA,4BAICA;AACLA,CAACA,6BAAA"}
+{"version":3,"file":"IGrouping.js","sourceRoot":"","sources":["IGrouping.ts"],"names":[],"mappings":""}

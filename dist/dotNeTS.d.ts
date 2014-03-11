@@ -13,18 +13,18 @@ declare module dotNeTS {
     function createList<T>(startArray?: T[]): List<T>;
 }
 declare module dotNeTS {
-    class Enumerable<TSource> implements IEnumerable<TSource>, IDisposable {
+    class Enumerable<TSource> implements IEnumerable<TSource> {
         public currentCollection: TSource[];
         public getEvaluatedCollection(): TSource[];
         public innerArray : TSource[];
         constructor(innerArray?: TSource[]);
-        public GroupBy<TResult>(callback: IFunc<TSource, TResult>): IEnumerable<Grouping<TResult, TSource>>;
+        public GroupBy<TResult>(callback: IFunc<TSource, TResult>): IEnumerable<IGrouping<TResult, TSource>>;
         public ElementAt(index: number): TSource;
         public ElementAtOrDefault(index: number): TSource;
         public ForEach(callback: IFunc<TSource, void>): void;
         public Contains(item: TSource): boolean;
-        public OrderBy<TKey>(keySelector: IFunc<TSource, TKey>): OrderedEnumerable<TSource>;
-        public OrderByDecending<TKey>(callback: IFunc<TSource, TKey>): OrderedEnumerable<TSource>;
+        public OrderBy<TKey>(keySelector: IFunc<TSource, TKey>): IOrderedEnumerable<TSource>;
+        public OrderByDecending<TKey>(callback: IFunc<TSource, TKey>): IOrderedEnumerable<TSource>;
         public First(predicate?: IFunc<TSource, boolean>): TSource;
         public FirstOrDefault(predicate?: IFunc<TSource, boolean>): TSource;
         public Single(predicate?: IFunc<TSource, boolean>): TSource;
@@ -39,7 +39,7 @@ declare module dotNeTS {
     }
 }
 declare module dotNeTS {
-    class List<TSource> extends Enumerable<TSource> implements IList<TSource>, IDisposable {
+    class List<TSource> extends Enumerable<TSource> implements IList<TSource>, IEnumerable<TSource>, IDisposable {
         constructor(innerArray?: TSource[]);
         public Add(item: TSource): void;
         public AddRange(collection: IEnumerable<TSource>): void;
@@ -53,11 +53,11 @@ declare module dotNeTS {
     }
 }
 declare module dotNeTS {
-    interface IEnumerable<TSource> {
+    interface IEnumerable<TSource> extends IDisposable {
         ForEach(callback: IFunc<TSource, void>): void;
         Contains(item: TSource): boolean;
-        OrderBy<TKey>(keySelector: IFunc<TSource, TKey>): OrderedEnumerable<TSource>;
-        OrderByDecending<TKey>(callback: IFunc<TSource, TKey>): OrderedEnumerable<TSource>;
+        OrderBy<TKey>(keySelector: IFunc<TSource, TKey>): IOrderedEnumerable<TSource>;
+        OrderByDecending<TKey>(callback: IFunc<TSource, TKey>): IOrderedEnumerable<TSource>;
         First(predicate?: IFunc<TSource, boolean>): TSource;
         FirstOrDefault(predicate?: IFunc<TSource, boolean>): TSource;
         Single(predicate?: IFunc<TSource, boolean>): TSource;
@@ -71,7 +71,7 @@ declare module dotNeTS {
     }
 }
 declare module dotNeTS {
-    interface IList<TSource> {
+    interface IList<TSource> extends IEnumerable<TSource> {
         Add(item: TSource): void;
         AddRange(collection: IEnumerable<TSource>): void;
         Remove(item: TSource): void;
@@ -83,17 +83,22 @@ declare module dotNeTS {
     }
 }
 declare module dotNeTS {
-    class Grouping<TKey, TElement> extends List<TElement> {
+    class Grouping<TKey, TElement> extends List<TElement> implements IGrouping<TKey, TElement>, IEnumerable<TElement> {
         public Key: TKey;
         constructor(Key: TKey, innerArray: TElement[]);
     }
 }
 declare module dotNeTS {
-    interface IOrderedEnumerable<TSource> {
-        OrderBy<TKey>(keySelector: IFunc<TSource, TKey>): OrderedEnumerable<TSource>;
-        OrderByDecending<TSort>(callback: IFunc<TSource, TSort>): OrderedEnumerable<TSource>;
-        ThenBy<TSort>(callback: IFunc<TSource, TSort>): OrderedEnumerable<TSource>;
-        ThenByDecending<TSort>(callback: IFunc<TSource, TSort>): OrderedEnumerable<TSource>;
+    interface IGrouping<TKey, TElement> extends IEnumerable<TElement> {
+        Key: TKey;
+    }
+}
+declare module dotNeTS {
+    interface IOrderedEnumerable<TSource> extends IEnumerable<TSource> {
+        OrderBy<TKey>(keySelector: IFunc<TSource, TKey>): IOrderedEnumerable<TSource>;
+        OrderByDecending<TSort>(callback: IFunc<TSource, TSort>): IOrderedEnumerable<TSource>;
+        ThenBy<TSort>(callback: IFunc<TSource, TSort>): IOrderedEnumerable<TSource>;
+        ThenByDecending<TSort>(callback: IFunc<TSource, TSort>): IOrderedEnumerable<TSource>;
     }
 }
 declare module dotNeTS {
@@ -108,10 +113,10 @@ declare module dotNeTS {
         private sortExpressions;
         public getEvaluatedCollection(): TSource[];
         private AddLazyOrderInternal<TKey>(callback, sortOrder);
-        public OrderBy<TKey>(keySelector: IFunc<TSource, TKey>): OrderedEnumerable<TSource>;
-        public OrderByDecending<TSort>(callback: IFunc<TSource, TSort>): OrderedEnumerable<TSource>;
-        public ThenBy<TSort>(callback: IFunc<TSource, TSort>): OrderedEnumerable<TSource>;
-        public ThenByDecending<TSort>(callback: IFunc<TSource, TSort>): OrderedEnumerable<TSource>;
+        public OrderBy<TKey>(keySelector: IFunc<TSource, TKey>): IOrderedEnumerable<TSource>;
+        public OrderByDecending<TSort>(callback: IFunc<TSource, TSort>): IOrderedEnumerable<TSource>;
+        public ThenBy<TSort>(callback: IFunc<TSource, TSort>): IOrderedEnumerable<TSource>;
+        public ThenByDecending<TSort>(callback: IFunc<TSource, TSort>): IOrderedEnumerable<TSource>;
         private EvaluateOrderBy();
         public Dispose(): void;
     }

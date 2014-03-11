@@ -1,7 +1,7 @@
 /// <reference path="../../typings/lodash/lodash.d.ts" />
 'use strict'
 module dotNeTS {
-    export class Enumerable<TSource> implements IEnumerable<TSource>, IDisposable {
+    export class Enumerable<TSource> implements IEnumerable<TSource> {
         public currentCollection: Array<TSource>;
         public getEvaluatedCollection() {
             return this.currentCollection;
@@ -20,7 +20,7 @@ module dotNeTS {
             this.innerArray = innerArray;
 
         }
-        GroupBy<TResult>(callback: IFunc<TSource, TResult>) : IEnumerable<Grouping<TResult, TSource>> {
+        GroupBy<TResult>(callback: IFunc<TSource, TResult>) : IEnumerable<IGrouping<TResult, TSource>> {
             var listOfGroupings = new List<Grouping<TResult, TSource>>();
             this.ForEach(function (item, index, col) {
                 var resultFound = false;
@@ -58,12 +58,12 @@ module dotNeTS {
         Contains(item: TSource): boolean {
             return _.contains(this.innerArray, item);
         }
-        OrderBy<TKey>(keySelector: dotNeTS.IFunc<TSource, TKey>): dotNeTS.OrderedEnumerable<TSource> {
+        OrderBy<TKey>(keySelector: dotNeTS.IFunc<TSource, TKey>): IOrderedEnumerable<TSource> {
             var ordered = new dotNeTS.OrderedEnumerable(this);
             return ordered.OrderBy(keySelector);
         }
 
-        OrderByDecending<TKey>(callback: IFunc<TSource, TKey>): dotNeTS.OrderedEnumerable<TSource> {
+        OrderByDecending<TKey>(callback: IFunc<TSource, TKey>): IOrderedEnumerable<TSource> {
             var ordered = new dotNeTS.OrderedEnumerable(this);
             return ordered.OrderByDecending(callback);
         }
@@ -163,7 +163,7 @@ module dotNeTS {
         }
 
         Dispose() {
-            delete this.currentCollection;
+           this.currentCollection = undefined;
         }
 
     }

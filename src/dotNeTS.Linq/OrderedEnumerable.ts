@@ -20,23 +20,23 @@ module dotNeTS {
                 sortOrder: sortOrder
             });
         }
-        OrderBy<TKey>(keySelector: IFunc<TSource, TKey>): OrderedEnumerable<TSource> {
+        OrderBy<TKey>(keySelector: IFunc<TSource, TKey>): IOrderedEnumerable<TSource> {
             this.sortExpressions = undefined;
             this.AddLazyOrderInternal(keySelector, SortOrder.ASC);
             return this;
         }
-        OrderByDecending<TSort>(callback: IFunc<TSource, TSort>): OrderedEnumerable<TSource> {
+        OrderByDecending<TSort>(callback: IFunc<TSource, TSort>): IOrderedEnumerable<TSource> {
             this.sortExpressions = undefined;
             this.AddLazyOrderInternal(callback, SortOrder.DESC);
             return this;
         }
-        ThenBy<TSort>(callback: IFunc<TSource, TSort>): OrderedEnumerable<TSource> {
+        ThenBy<TSort>(callback: IFunc<TSource, TSort>): IOrderedEnumerable<TSource> {
             var newOrdered = new OrderedEnumerable(this);
             newOrdered.sortExpressions = _.clone(this.sortExpressions);
             newOrdered.AddLazyOrderInternal(callback, SortOrder.ASC);
             return newOrdered;
         }
-        ThenByDecending<TSort>(callback: IFunc<TSource, TSort>): OrderedEnumerable<TSource> {
+        ThenByDecending<TSort>(callback: IFunc<TSource, TSort>): IOrderedEnumerable<TSource> {
             var newOrdered = new OrderedEnumerable(this);
             newOrdered.sortExpressions = _.clone(this.sortExpressions);
             newOrdered.AddLazyOrderInternal(callback, SortOrder.DESC);

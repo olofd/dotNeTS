@@ -1,4 +1,4 @@
-﻿/// <reference path="../../typings/lodash/lodash.d.ts" />
+/// <reference path="../../typings/lodash/lodash.d.ts" />
 'use strict';
 var dotNeTS;
 (function (dotNeTS) {
@@ -167,7 +167,7 @@ var dotNeTS;
         };
 
         Enumerable.prototype.Dispose = function () {
-            delete this.currentCollection;
+            this.currentCollection = undefined;
         };
         return Enumerable;
     })();
