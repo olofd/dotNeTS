@@ -4,6 +4,7 @@ module dotNeTS {
         AddRange(collection: IEnumerable<TSource>): void;
         Remove(item: TSource): void;
         RemoveAt(index: number);
+        ReplaceWith(replaceItem: TSource, whereSelector: dotNeTS.IComparer<TSource, boolean>);
         Clear():void;
         Contains(item : TSource) : boolean;
         IndexOf(item: TSource) : number;

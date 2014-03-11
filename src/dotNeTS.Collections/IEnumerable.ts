@@ -1,5 +1,6 @@
 module dotNeTS {
     export interface IEnumerable<TSource> extends IDisposable {
+        innerArray: Array<TSource>;
         ForEach(callback: dotNeTS.IFunc<TSource, void>): void
         Contains(item: TSource): boolean;
         GroupBy<TResult>(callback: IFunc<TSource, TResult>): IEnumerable<IGrouping<TResult, TSource>>;
@@ -14,6 +15,6 @@ module dotNeTS {
         Select<TResult>(callback: IFunc<TSource, TResult>): IEnumerable<TResult>;
         Where(predicate?: IFunc<TSource, boolean>): IEnumerable<TSource>;
         ToArray(): TSource[];
-        ToList(): dotNeTS.List<TSource>;
+        ToList(): IList<TSource>;
     }
 }

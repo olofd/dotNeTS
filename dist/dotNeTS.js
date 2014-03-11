@@ -186,7 +186,7 @@ var dotNeTS;
         };
 
         Enumerable.prototype.Dispose = function () {
-            delete this.currentCollection;
+            this.currentCollection = undefined;
         };
         return Enumerable;
     })();

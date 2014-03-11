@@ -99,7 +99,7 @@ Interfaces with underlying implementations:
             Select<TResult>(callback: IFunc<TSource, TResult>): IEnumerable<TResult>;
             Where(predicate?: IFunc<TSource, boolean>): IEnumerable<TSource>;
             ToArray(): TSource[];
-            ToList(): dotNeTS.List<TSource>;
+            ToList(): IList<TSource>;
         }
     }
 

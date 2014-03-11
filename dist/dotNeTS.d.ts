@@ -34,7 +34,7 @@ declare module dotNeTS {
         public Select<TResult>(callback: IFunc<TSource, TResult>): IEnumerable<TResult>;
         public Where(predicate?: IFunc<TSource, boolean>): IEnumerable<TSource>;
         public ToArray(): TSource[];
-        public ToList(): List<TSource>;
+        public ToList(): IList<TSource>;
         public Dispose(): void;
     }
 }
@@ -54,8 +54,10 @@ declare module dotNeTS {
 }
 declare module dotNeTS {
     interface IEnumerable<TSource> extends IDisposable {
+        innerArray: TSource[];
         ForEach(callback: IFunc<TSource, void>): void;
         Contains(item: TSource): boolean;
+        GroupBy<TResult>(callback: IFunc<TSource, TResult>): IEnumerable<IGrouping<TResult, TSource>>;
         OrderBy<TKey>(keySelector: IFunc<TSource, TKey>): IOrderedEnumerable<TSource>;
         OrderByDecending<TKey>(callback: IFunc<TSource, TKey>): IOrderedEnumerable<TSource>;
         First(predicate?: IFunc<TSource, boolean>): TSource;
@@ -67,7 +69,7 @@ declare module dotNeTS {
         Select<TResult>(callback: IFunc<TSource, TResult>): IEnumerable<TResult>;
         Where(predicate?: IFunc<TSource, boolean>): IEnumerable<TSource>;
         ToArray(): TSource[];
-        ToList(): List<TSource>;
+        ToList(): IList<TSource>;
     }
 }
 declare module dotNeTS {
@@ -76,6 +78,7 @@ declare module dotNeTS {
         AddRange(collection: IEnumerable<TSource>): void;
         Remove(item: TSource): void;
         RemoveAt(index: number): any;
+        ReplaceWith(replaceItem: TSource, whereSelector: IComparer<TSource, boolean>): any;
         Clear(): void;
         Contains(item: TSource): boolean;
         IndexOf(item: TSource): number;

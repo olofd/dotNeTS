@@ -98,7 +98,7 @@ return languagesAvailable.Where(b =&gt; b.Key === 'Sweden').ToList();
         Select&lt;TResult&gt;(callback: IFunc&lt;TSource, TResult&gt;): IEnumerable&lt;TResult&gt;;
         Where(predicate?: IFunc&lt;TSource, boolean&gt;): IEnumerable&lt;TSource&gt;;
         ToArray(): TSource[];
-        ToList(): dotNeTS.List&lt;TSource&gt;;
+        ToList(): IList&lt;TSource&gt;;
     }
 }
 

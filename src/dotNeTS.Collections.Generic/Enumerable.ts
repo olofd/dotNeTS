@@ -158,7 +158,7 @@ module dotNeTS {
             return this.innerArray;
         }
 
-        ToList(): dotNeTS.List<TSource> {
+        ToList(): IList<TSource> {
             return new List<TSource>(this.innerArray);
         }
 
