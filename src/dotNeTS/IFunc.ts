@@ -5,5 +5,4 @@ module dotNeTS {
     export interface IComparer<T,TResult> {
         (newValue: T,oldvalue : T, index: number, list: T[]): TResult;
     }
-
 }

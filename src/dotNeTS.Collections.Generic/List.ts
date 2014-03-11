@@ -26,7 +26,7 @@ module dotNeTS {
         }
         RemoveAt(index: number) {
 
-        } 
+        }
         Clear(): void {
 
         }
@@ -34,9 +34,13 @@ module dotNeTS {
         IndexOf(item: TSource): number {
             return this.innerArray.indexOf(item);
         }
-        Insert(index: number, item: TSource): void {
+        Insert(index: number, ...item: TSource[]): void {
+            var args = [index, 0];
+            Array.prototype.push.apply(args, Array.prototype.slice.call(arguments, 1));
+            Array.prototype.splice.apply(this.innerArray, args);
 
         }
+
         Dispose() {
             super.Dispose();
         }

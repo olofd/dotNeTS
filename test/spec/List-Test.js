@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 var List = dotNeTS.List;
 
 function GetUser() {
@@ -288,6 +288,27 @@ describe('Test of List-implementation', function () {
             return b.id === 1;
         }).userName;
         expect(idOne).toBe('maria');
+    });
+
+    it('Insert', function () {
+        var list = getFilledList();
+        var element = getFilledList().ElementAt(2);
+        list.Insert(0, element);
+        expect(list.ElementAt(0).id).toBe(3);
+        expect(list.ElementAt(1).id).toBe(1);
+        expect(list.Count()).toBe(4);
+    });
+
+    it('Group By', function () {
+        var list = getFilledList();
+        var outerList = new List([list]);
+        var grouping = list.GroupBy(function (b) {
+            return b.age;
+        });
+        var firstGroup = grouping.Where(function (b) {
+            return b.Key === 28;
+        }).FirstOrDefault();
+        expect(firstGroup.Count()).toBe(2);
     });
 });
 //# sourceMappingURL=List-Test.js.map

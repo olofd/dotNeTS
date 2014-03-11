@@ -270,5 +270,24 @@ describe('Test of List-implementation', function () {
 
     });
 
+    it('Insert', function () {
+        var list = getFilledList();
+        var element = getFilledList().ElementAt(2);
+        list.Insert(0, element);
+        expect(list.ElementAt(0).id).toBe(3);
+        expect(list.ElementAt(1).id).toBe(1);
+        expect(list.Count()).toBe(4);
+    });
+
+    it('Group By', function () {
+        var list = getFilledList();
+        var outerList = new List<dotNeTS.List<User>>([list]);
+        var grouping = list.GroupBy(b => b.age);
+        var firstGroup = grouping.Where(b => b.Key === 28).FirstOrDefault();
+        expect(firstGroup.Count()).toBe(2);
+        
+    });
+
 
 });
+ 

@@ -1,4 +1,4 @@
-/// <reference path="../../typings/lodash/lodash.d.ts" />
+﻿/// <reference path="../../typings/lodash/lodash.d.ts" />
 'use strict';
 var dotNeTS;
 (function (dotNeTS) {
@@ -23,6 +23,25 @@ var dotNeTS;
             configurable: true
         });
 
+        Enumerable.prototype.GroupBy = function (callback) {
+            var listOfGroupings = new dotNeTS.List();
+            this.ForEach(function (item, index, col) {
+                var resultFound = false;
+                var result = callback(item, index, col);
+                listOfGroupings.ForEach(function (innerItem, innerIndex, innerCol) {
+                    if (innerItem.Key === result) {
+                        innerItem.Add(item);
+                        resultFound = true;
+                        return false;
+                    }
+                });
+                if (!resultFound) {
+                    listOfGroupings.Add(new dotNeTS.Grouping(result, [item]));
+                }
+            });
+
+            return listOfGroupings;
+        };
         Enumerable.prototype.ElementAt = function (index) {
             if (index >= this.Count()) {
                 throw new dotNeTS.ArgumentOutOfRangeException("Index was out of range. Must be non-negative and less than the size of the collection.");

@@ -20,7 +20,25 @@ module dotNeTS {
             this.innerArray = innerArray;
 
         }
+        GroupBy<TResult>(callback: IFunc<TSource, TResult>) : IEnumerable<Grouping<TResult, TSource>> {
+            var listOfGroupings = new List<Grouping<TResult, TSource>>();
+            this.ForEach(function (item, index, col) {
+                var resultFound = false;
+                var result = callback(item, index, col);
+                listOfGroupings.ForEach(function (innerItem, innerIndex, innerCol) {
+                    if (innerItem.Key === result) {
+                        innerItem.Add(item);
+                        resultFound = true;
+                        return false;
+                    }
+                });
+                if (!resultFound) {
+                    listOfGroupings.Add(new Grouping(result, [item]));
+                }
+            });
 
+            return listOfGroupings;
+        }
         ElementAt(index: number): TSource {
             if (index >= this.Count()) {
                 throw new ArgumentOutOfRangeException("Index was out of range. Must be non-negative and less than the size of the collection.");

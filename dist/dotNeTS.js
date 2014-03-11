@@ -1,4 +1,4 @@
-var dotNeTS;
+﻿var dotNeTS;
 (function (dotNeTS) {
     var Exception = (function () {
         function Exception(name, message) {
@@ -43,6 +43,25 @@ var dotNeTS;
             configurable: true
         });
 
+        Enumerable.prototype.GroupBy = function (callback) {
+            var listOfGroupings = new dotNeTS.List();
+            this.ForEach(function (item, index, col) {
+                var resultFound = false;
+                var result = callback(item, index, col);
+                listOfGroupings.ForEach(function (innerItem, innerIndex, innerCol) {
+                    if (innerItem.Key === result) {
+                        innerItem.Add(item);
+                        resultFound = true;
+                        return false;
+                    }
+                });
+                if (!resultFound) {
+                    listOfGroupings.Add(new dotNeTS.Grouping(result, [item]));
+                }
+            });
+
+            return listOfGroupings;
+        };
         Enumerable.prototype.ElementAt = function (index) {
             if (index >= this.Count()) {
                 throw new dotNeTS.ArgumentOutOfRangeException("Index was out of range. Must be non-negative and less than the size of the collection.");
@@ -218,14 +237,34 @@ var dotNeTS;
         List.prototype.IndexOf = function (item) {
             return this.innerArray.indexOf(item);
         };
-        List.prototype.Insert = function (index, item) {
+        List.prototype.Insert = function (index) {
+            var item = [];
+            for (var _i = 0; _i < (arguments.length - 1); _i++) {
+                item[_i] = arguments[_i + 1];
+            }
+            var args = [index, 0];
+            Array.prototype.push.apply(args, Array.prototype.slice.call(arguments, 1));
+            Array.prototype.splice.apply(this.innerArray, args);
         };
+
         List.prototype.Dispose = function () {
             _super.prototype.Dispose.call(this);
         };
         return List;
     })(dotNeTS.Enumerable);
     dotNeTS.List = List;
+})(dotNeTS || (dotNeTS = {}));
+var dotNeTS;
+(function (dotNeTS) {
+    var Grouping = (function (_super) {
+        __extends(Grouping, _super);
+        function Grouping(Key, innerArray) {
+            _super.call(this, innerArray);
+            this.Key = Key;
+        }
+        return Grouping;
+    })(dotNeTS.List);
+    dotNeTS.Grouping = Grouping;
 })(dotNeTS || (dotNeTS = {}));
 var dotNeTS;
 (function (dotNeTS) {
