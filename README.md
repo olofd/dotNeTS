@@ -70,16 +70,61 @@ Example 2 (Actual code from project)
                             .Where(b => b.language && b.language !== "")
                             .OrderBy(b => b.language)
                             .ThenBy(b => b.country);
-    return languagesAvailable.ToArray();:
+    return languagesAvailable.ToArray();
+
+Example 3 (Actual code from project)   
+
+    var languagesAvailable = allLanguages.Where(s => !languagesAlreadyAdded.Where(es => es.LangCode === s.value).Any())
+                            .GroupBy(b => b.country)
+    return languagesAvailable.Where(b => b.Key === 'Sweden').ToList();
 
 
-Implementet classes:
-* System.Exception
-* System.InvalidOperationException
-* System.Collections.Generic.Enumerable
-    * First(predicate?: _.ListIterator&lt;T, boolean>): T
 
+Interfaces with underlying implementations:
+(* all implementations have tests.)
 
-Implemented interfaces:
-* System.Collections.IEnumerable
-* System.Collections.IList
+    module dotNeTS {
+        export interface IEnumerable<TSource> extends IDisposable {
+            ForEach(callback: dotNeTS.IFunc<TSource, void>): void
+            Contains(item: TSource): boolean;
+            GroupBy<TResult>(callback: IFunc<TSource, TResult>): IEnumerable<IGrouping<TResult, TSource>>;
+            OrderBy<TKey>(keySelector: dotNeTS.IFunc<TSource, TKey>): IOrderedEnumerable<TSource>;
+            OrderByDecending<TKey>(callback: IFunc<TSource, TKey>): IOrderedEnumerable<TSource>;
+            First(predicate?: IFunc<TSource, boolean>): TSource;
+            FirstOrDefault(predicate?: IFunc<TSource, boolean>): TSource;
+            Single(predicate?: IFunc<TSource, boolean>): TSource;
+            SingleOrDefault(predicate?: IFunc<TSource, boolean>): TSource;
+            Any(predicate?: IFunc<TSource, boolean>): boolean;
+            Count(predicate?: IFunc<TSource, boolean>): number;
+            Select<TResult>(callback: IFunc<TSource, TResult>): IEnumerable<TResult>;
+            Where(predicate?: IFunc<TSource, boolean>): IEnumerable<TSource>;
+            ToArray(): TSource[];
+            ToList(): dotNeTS.List<TSource>;
+        }
+    }
+
+    module dotNeTS {
+        export interface IOrderedEnumerable<TSource> extends IEnumerable<TSource> {
+            OrderBy<TKey>(keySelector: IFunc<TSource, TKey>): IOrderedEnumerable<TSource>;
+            OrderByDecending<TSort>(callback: IFunc<TSource, TSort>): IOrderedEnumerable<TSource>;
+            ThenBy<TSort>(callback: IFunc<TSource, TSort>): IOrderedEnumerable<TSource>;
+            ThenByDecending<TSort>(callback: IFunc<TSource, TSort>): IOrderedEnumerable<TSource>;
+        }
+    } 
+    module dotNeTS {
+        export interface IList<TSource> extends IEnumerable<TSource>{
+            Add(item: TSource): void;
+            AddRange(collection: IEnumerable<TSource>): void;
+            Remove(item: TSource): void;
+            RemoveAt(index: number);
+            Clear():void;
+            Contains(item : TSource) : boolean;
+            IndexOf(item: TSource) : number;
+            Insert(index: number, item: TSource) : void;
+        }
+    }
+    module dotNeTS {
+        export interface IGrouping<TKey, TElement> extends IEnumerable<TElement>{
+            Key: TKey;
+        }
+    }
