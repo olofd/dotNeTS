@@ -12,7 +12,7 @@ and functionality. e.g the List-implementation relies on lodash.</p>
 
 <p>And <strong>YES</strong> right now, this library uses uppercase for methods, something that is frowned upon in javascript-world.<br />
 I know about the dangers with the new-operator and binding this to global-object. But my defence is that dotNeTS soon<br />
-will compile to two seperate libraries one with uppercase(.NET-ish) and one that passes jslint. And also that<br />
+will compile to two seperate libraries one with uppercase(.NET-ish) and one that passes jslint. And also,<br />
 if you use typescript, it helps you avoid the new and this-pitfalls (some atleast). At the end of the day, you still need<br />
 to know what you�re doing.</p>
 
@@ -26,6 +26,9 @@ and sits ontop of lodash. I built it to avoid having to pull in lodash and Linq.
 
 <pre><code>bower install dotNeTS
 </code></pre>
+
+<p>IMPORTANT NOTE FOR Visual Studio! This library includes typescript definition AND source.<br />
+You have to exclude one of them in VS to avoid duplicate definitions.</p>
 
 <p>Example 1:</p>
 

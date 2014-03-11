@@ -1,6 +1,8 @@
 dotNeTS
 =======
 
+
+
 .NET library-syntax for typescript/javascript
 
 This library aims to implement the good parts of .Net-syntax in typescript/javascript.
@@ -13,7 +15,7 @@ and functionality. e.g the List-implementation relies on lodash.
 
 And **YES** right now, this library uses uppercase for methods, something that is frowned upon in javascript-world.
 I know about the dangers with the new-operator and binding this to global-object. But my defence is that dotNeTS soon
-will compile to two seperate libraries one with uppercase(.NET-ish) and one that passes jslint. And also that
+will compile to two seperate libraries one with uppercase(.NET-ish) and one that passes jslint. And also,
 if you use typescript, it helps you avoid the new and this-pitfalls (some atleast). At the end of the day, you still need
 to know what you´re doing.
 
@@ -27,6 +29,10 @@ dependencies:
 Install:
 
     bower install dotNeTS
+
+IMPORTANT NOTE FOR Visual Studio! This library includes typescript definition AND source.
+You have to exclude one of them in VS to avoid duplicate definitions.
+
 
 
 Example 1:
