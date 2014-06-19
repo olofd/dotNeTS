@@ -263,6 +263,11 @@ declare module _ {
         * @param array Array to compact.
         * @return (Array) Returns a new array of filtered values.
         **/
+        compact<T>(array: Array<T>): T[];
+
+        /**
+        * @see _.compact
+        **/
         compact<T>(array: List<T>): T[];
     }
 
@@ -270,7 +275,7 @@ declare module _ {
         /**
         * @see _.compact
         **/
-        compact<T>(): LoDashArrayWrapper<T>;
+        compact(): LoDashArrayWrapper<T>;
     }
 
     //_.difference
@@ -283,11 +288,22 @@ declare module _ {
         * @return Returns a new array of filtered values.
         **/
         difference<T>(
+            array: Array<T>,
+            ...others: Array<T>[]): T[];
+        /**
+        * @see _.difference
+        **/
+        difference<T>(
             array: List<T>,
             ...others: List<T>[]): T[];
     }
 
     interface LoDashArrayWrapper<T> {
+        /**
+        * @see _.difference
+        **/
+        difference(
+            ...others: Array<T>[]): LoDashArrayWrapper<T>;
         /**
         * @see _.difference
         **/
@@ -307,7 +323,7 @@ declare module _ {
         * @return Returns the index of the found element, else -1.
         **/
         findIndex<T>(
-            array: List<T>,
+            array: Array<T>,
             callback: ListIterator<T, boolean>,
             thisArg?: any): number;
 
@@ -316,7 +332,29 @@ declare module _ {
         **/
         findIndex<T>(
             array: List<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): number;
+
+        /**
+        * @see _.findIndex
+        **/
+        findIndex<T>(
+            array: Array<T>,
             pluckValue: string): number;
+
+        /**
+        * @see _.findIndex
+        **/
+        findIndex<T>(
+            array: List<T>,
+            pluckValue: string): number;
+
+        /**
+        * @see _.findIndex
+        **/
+        findIndex<W, T>(
+            array: Array<T>,
+            whereDictionary: W): number;
 
         /**
         * @see _.findIndex
@@ -337,7 +375,7 @@ declare module _ {
         * @return Returns the index of the found element, else -1.
         **/
         findLastIndex<T>(
-            array: List<T>,
+            array: Array<T>,
             callback: ListIterator<T, boolean>,
             thisArg?: any): number;
 
@@ -346,7 +384,29 @@ declare module _ {
         **/
         findLastIndex<T>(
             array: List<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): number;
+
+        /**
+        * @see _.findLastIndex
+        **/
+        findLastIndex<T>(
+            array: Array<T>,
             pluckValue: string): number;
+
+        /**
+        * @see _.findLastIndex
+        **/
+        findLastIndex<T>(
+            array: List<T>,
+            pluckValue: string): number;
+
+        /**
+        * @see _.findLastIndex
+        **/
+        findLastIndex<T>(
+            array: Array<T>,
+            whereDictionary: Dictionary<any>): number;
 
         /**
         * @see _.findLastIndex
@@ -372,7 +432,20 @@ declare module _ {
         * @param array Retrieves the first element of this array.
         * @return Returns the first element of `array`.
         **/
+        first<T>(array: Array<T>): T;
+
+        /**
+        * @see _.first
+        **/
         first<T>(array: List<T>): T;
+
+        /**
+        * @see _.first
+        * @param n The number of elements to return.
+        **/
+        first<T>(
+            array: Array<T>,
+            n: number): T[];
 
         /**
         * @see _.first
@@ -381,6 +454,16 @@ declare module _ {
         first<T>(
             array: List<T>,
             n: number): T[];
+
+        /**
+        * @see _.first
+        * @param callback The function called per element.
+        * @param [thisArg] The this binding of callback.
+        **/
+        first<T>(
+            array: Array<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): T[];
 
         /**
         * @see _.first
@@ -397,8 +480,24 @@ declare module _ {
         * @param pluckValue "_.pluck" style callback value
         **/
         first<T>(
+            array: Array<T>,
+            pluckValue: string): T[];
+
+        /**
+        * @see _.first
+        * @param pluckValue "_.pluck" style callback value
+        **/
+        first<T>(
             array: List<T>,
             pluckValue: string): T[];
+
+        /**
+        * @see _.first
+        * @param whereValue "_.where" style callback value
+        **/
+        first<W, T>(
+            array: Array<T>,
+            whereValue: W): T[];
 
         /**
         * @see _.first
@@ -411,7 +510,19 @@ declare module _ {
         /**
         * @see _.first
         **/
+        head<T>(array: Array<T>): T;
+
+        /**
+        * @see _.first
+        **/
         head<T>(array: List<T>): T;
+
+        /**
+        * @see _.first
+        **/
+        head<T>(
+            array: Array<T>,
+            n: number): T[];
 
         /**
         * @see _.first
@@ -424,9 +535,24 @@ declare module _ {
         * @see _.first
         **/
         head<T>(
+            array: Array<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): T[];
+
+        /**
+        * @see _.first
+        **/
+        head<T>(
             array: List<T>,
             callback: ListIterator<T, boolean>,
             thisArg?: any): T[];
+
+        /**
+        * @see _.first
+        **/
+        head<T>(
+            array: Array<T>,
+            pluckValue: string): T[];
 
         /**
         * @see _.first
@@ -439,8 +565,20 @@ declare module _ {
         * @see _.first
         **/
         head<W, T>(
+            array: Array<T>,
+            whereValue: W): T[];
+
+        /**
+        * @see _.first
+        **/
+        head<W, T>(
             array: List<T>,
             whereValue: W): T[];
+
+        /**
+        * @see _.first
+        **/
+        take<T>(array: Array<T>): T;
 
         /**
         * @see _.first
@@ -451,8 +589,23 @@ declare module _ {
         * @see _.first
         **/
         take<T>(
+            array: Array<T>,
+            n: number): T[];
+
+        /**
+        * @see _.first
+        **/
+        take<T>(
             array: List<T>,
             n: number): T[];
+
+        /**
+        * @see _.first
+        **/
+        take<T>(
+            array: Array<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): T[];
 
         /**
         * @see _.first
@@ -466,8 +619,22 @@ declare module _ {
         * @see _.first
         **/
         take<T>(
+            array: Array<T>,
+            pluckValue: string): T[];
+
+        /**
+        * @see _.first
+        **/
+        take<T>(
             array: List<T>,
             pluckValue: string): T[];
+
+        /**
+        * @see _.first
+        **/
+        take<W, T>(
+            array: Array<T>,
+            whereValue: W): T[];
 
         /**
         * @see _.first
@@ -494,33 +661,103 @@ declare module _ {
         * @param shallow If true then only flatten one level, optional, default = false.
         * @return `array` flattened.
         **/
+        flatten<T>(array: Array<any>, isShallow?: boolean): T[];
+
+        /**
+        * @see _.flatten
+        **/
         flatten<T>(array: List<any>, isShallow?: boolean): T[];
 
+        /**
+        * @see _.flatten
+        **/
+        flatten<T>(
+            array: Array<any>,
+            isShallow: boolean,
+            callback: ListIterator<any, T>,
+            thisArg?: any): T[];
+
+        /**
+        * @see _.flatten
+        **/
         flatten<T>(
             array: List<any>,
             isShallow: boolean,
             callback: ListIterator<any, T>,
             thisArg?: any): T[];
 
+        /**
+        * @see _.flatten
+        **/
+        flatten<T>(
+            array: Array<any>,
+            callback: ListIterator<any, T>,
+            thisArg?: any): T[];
+
+        /**
+        * @see _.flatten
+        **/
         flatten<T>(
             array: List<any>,
             callback: ListIterator<any, T>,
             thisArg?: any): T[];
 
+        /**
+        * @see _.flatten
+        **/
+        flatten<W, T>(
+            array: Array<any>,
+            isShallow: boolean,
+            whereValue: W): T[];
+
+        /**
+        * @see _.flatten
+        **/
         flatten<W, T>(
             array: List<any>,
             isShallow: boolean,
             whereValue: W): T[];
 
+        /**
+        * @see _.flatten
+        **/
+        flatten<W, T>(
+            array: Array<any>,
+            whereValue: W): T[];
+
+        /**
+        * @see _.flatten
+        **/
         flatten<W, T>(
             array: List<any>,
             whereValue: W): T[];
 
+        /**
+        * @see _.flatten
+        **/
+        flatten<T>(
+            array: Array<any>,
+            isShallow: boolean,
+            pluckValue: string): T[];
+
+        /**
+        * @see _.flatten
+        **/
         flatten<T>(
             array: List<any>,
             isShallow: boolean,
             pluckValue: string): T[];
 
+        /**
+        * @see _.flatten
+        **/
+        flatten<T>(
+            array: Array<any>,
+            pluckValue: string): T[];
+
+        /**
+        * @see _.flatten
+        **/
         flatten<T>(
             array: List<any>,
             pluckValue: string): T[];
@@ -532,26 +769,44 @@ declare module _ {
         **/
         flatten<Flat>(isShallow?: boolean): LoDashArrayWrapper<Flat>;
 
+        /**
+        * @see _.flatten
+        **/
         flatten<Flat>(
             isShallow: boolean,
             callback: ListIterator<T, Flat>,
             thisArg?: any): LoDashArrayWrapper<Flat>;
 
+        /**
+        * @see _.flatten
+        **/
         flatten<Flat>(
             callback: ListIterator<T, Flat>,
             thisArg?: any): LoDashArrayWrapper<Flat>;
 
+        /**
+        * @see _.flatten
+        **/
         flatten<Flat>(
             isShallow: boolean,
             pluckValue: string): LoDashArrayWrapper<Flat>;
 
+        /**
+        * @see _.flatten
+        **/
         flatten<Flat>(
             pluckValue: string): LoDashArrayWrapper<Flat>;
 
+        /**
+        * @see _.flatten
+        **/
         flatten<Flat, W>(
             isShallow: boolean,
             whereValue: W): LoDashArrayWrapper<Flat>;
 
+        /**
+        * @see _.flatten
+        **/
         flatten<Flat, W>(
             whereValue: W): LoDashArrayWrapper<Flat>;
     }
@@ -568,8 +823,24 @@ declare module _ {
         * @return The index of `value` within `array`.
         **/
         indexOf<T>(
+            array: Array<T>,
+            value: T): number;
+
+        /**
+        * @see _.indexOf
+        **/
+        indexOf<T>(
             array: List<T>,
             value: T): number;
+
+        /**
+        * @see _.indexOf
+        * @param fromIndex The index to search from
+        **/
+        indexOf<T>(
+            array: Array<T>,
+            value: T,
+            fromIndex: number): number;
 
         /**
         * @see _.indexOf
@@ -579,6 +850,15 @@ declare module _ {
             array: List<T>,
             value: T,
             fromIndex: number): number;
+
+        /**
+        * @see _.indexOf
+        * @param isSorted True to perform a binary search on a sorted array.
+        **/
+        indexOf<T>(
+            array: Array<T>,
+            value: T,
+            isSorted: boolean): number;
 
         /**
         * @see _.indexOf
@@ -608,7 +888,21 @@ declare module _ {
         * @return Returns everything but the last `n` elements of `array`.
         **/
         initial<T>(
+            array: Array<T>): T[];
+
+        /**
+        * @see _.initial
+        **/
+        initial<T>(
             array: List<T>): T[];
+
+        /**
+        * @see _.initial
+        * @param n The number of elements to exclude.
+        **/
+        initial<T>(
+            array: Array<T>,
+            n: number): T[];
 
         /**
         * @see _.initial
@@ -623,6 +917,14 @@ declare module _ {
         * @param callback The function called per element
         **/
         initial<T>(
+            array: Array<T>,
+            callback: ListIterator<T, boolean>): T[];
+
+        /**
+        * @see _.initial
+        * @param callback The function called per element
+        **/
+        initial<T>(
             array: List<T>,
             callback: ListIterator<T, boolean>): T[];
 
@@ -631,8 +933,24 @@ declare module _ {
         * @param pluckValue _.pluck style callback
         **/
         initial<T>(
+            array: Array<T>,
+            pluckValue: string): T[];
+
+        /**
+        * @see _.initial
+        * @param pluckValue _.pluck style callback
+        **/
+        initial<T>(
             array: List<T>,
             pluckValue: string): T[];
+
+        /**
+        * @see _.initial
+        * @param whereValue _.where style callback
+        **/
+        initial<W, T>(
+            array: Array<T>,
+            whereValue: W): T[];
 
         /**
         * @see _.initial
@@ -650,6 +968,11 @@ declare module _ {
         * equality for comparisons, i.e. ===.
         * @param arrays The arrays to inspect.
         * @return Returns an array of composite values.
+        **/
+        intersection<T>(...arrays: Array<T>[]): T[];
+
+        /**
+        * @see _.intersection
         **/
         intersection<T>(...arrays: List<T>[]): T[];
     }
@@ -669,7 +992,20 @@ declare module _ {
         * @param array The array to query.
         * @return Returns the last element(s) of array.
         **/
+        last<T>(array: Array<T>): T;
+
+        /**
+        * @see _.last
+        **/
         last<T>(array: List<T>): T;
+
+        /**
+        * @see _.last
+        * @param n The number of elements to return
+        **/
+        last<T>(
+            array: Array<T>,
+            n: number): T[];
 
         /**
         * @see _.last
@@ -678,6 +1014,15 @@ declare module _ {
         last<T>(
             array: List<T>,
             n: number): T[];
+
+        /**
+        * @see _.last
+        * @param callback The function called per element
+        **/
+        last<T>(
+            array: Array<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): T[];
 
         /**
         * @see _.last
@@ -693,8 +1038,24 @@ declare module _ {
         * @param pluckValue _.pluck style callback
         **/
         last<T>(
+            array: Array<T>,
+            pluckValue: string): T[];
+
+        /**
+        * @see _.last
+        * @param pluckValue _.pluck style callback
+        **/
+        last<T>(
             array: List<T>,
             pluckValue: string): T[];
+
+        /**
+        * @see _.last
+        * @param whereValue _.where style callback
+        **/
+        last<W, T>(
+            array: Array<T>,
+            whereValue: W): T[];
 
         /**
         * @see _.last
@@ -717,6 +1078,14 @@ declare module _ {
         * @return The index of the matched value or -1.
         **/
         lastIndexOf<T>(
+            array: Array<T>,
+            value: T,
+            fromIndex?: number): number;
+
+        /**
+        * @see _.lastIndexOf
+        **/
+        lastIndexOf<T>(
             array: List<T>,
             value: T,
             fromIndex?: number): number;
@@ -730,6 +1099,13 @@ declare module _ {
         * @param array The array to modify.
         * @param values The values to remove.
         * @return array.
+        **/
+        pull(
+            array: Array<any>,
+            ...values: any[]): any[];
+
+        /**
+        * @see _.pull
         **/
         pull(
             array: List<any>,
@@ -747,7 +1123,6 @@ declare module _ {
         * @param step The value to increment or decrement by.
         * @return Returns a new range array.
         **/
-
         range(
             start: number,
             stop: number,
@@ -780,6 +1155,14 @@ declare module _ {
         * @return A new array of removed elements.
         **/
         remove(
+            array: Array<any>,
+            callback?: ListIterator<any, boolean>,
+            thisArg?: any): any[];
+
+        /**
+        * @see _.remove
+        **/
+        remove(
             array: List<any>,
             callback?: ListIterator<any, boolean>,
             thisArg?: any): any[];
@@ -789,8 +1172,24 @@ declare module _ {
         * @param pluckValue _.pluck style callback
         **/
         remove(
+            array: Array<any>,
+            pluckValue?: string): any[];
+
+        /**
+        * @see _.remove
+        * @param pluckValue _.pluck style callback
+        **/
+        remove(
             array: List<any>,
             pluckValue?: string): any[];
+
+        /**
+        * @see _.remove
+        * @param whereValue _.where style callback
+        **/
+        remove(
+            array: Array<any>,
+            wherealue?: Dictionary<any>): any[];
 
         /**
         * @see _.remove
@@ -821,7 +1220,20 @@ declare module _ {
         * @param {*} [thisArg] The this binding of callback.
         * @return Returns a slice of array.
         **/
+        rest<T>(array: Array<T>): T[];
+
+        /**
+        * @see _.rest
+        **/
         rest<T>(array: List<T>): T[];
+
+        /**
+        * @see _.rest
+        **/
+        rest<T>(
+            array: Array<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): T[];
 
         /**
         * @see _.rest
@@ -835,8 +1247,22 @@ declare module _ {
         * @see _.rest
         **/
         rest<T>(
+            array: Array<T>,
+            n: number): T[];
+
+        /**
+        * @see _.rest
+        **/
+        rest<T>(
             array: List<T>,
             n: number): T[];
+
+        /**
+        * @see _.rest
+        **/
+        rest<T>(
+            array: Array<T>,
+            pluckValue: string): T[];
 
         /**
         * @see _.rest
@@ -849,13 +1275,33 @@ declare module _ {
         * @see _.rest
         **/
         rest<W, T>(
+            array: Array<T>,
+            whereValue: W): T[];
+
+        /**
+        * @see _.rest
+        **/
+        rest<W, T>(
             array: List<T>,
             whereValue: W): T[];
 
         /**
         * @see _.rest
         **/
+        drop<T>(array: Array<T>): T[];
+
+        /**
+        * @see _.rest
+        **/
         drop<T>(array: List<T>): T[];
+
+        /**
+        * @see _.rest
+        **/
+        drop<T>(
+            array: Array<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): T[];
 
         /**
         * @see _.rest
@@ -869,8 +1315,22 @@ declare module _ {
         * @see _.rest
         **/
         drop<T>(
+            array: Array<T>,
+            n: number): T[];
+
+        /**
+        * @see _.rest
+        **/
+        drop<T>(
             array: List<T>,
             n: number): T[];
+
+        /**
+        * @see _.rest
+        **/
+        drop<T>(
+            array: Array<T>,
+            pluckValue: string): T[];
 
         /**
         * @see _.rest
@@ -883,13 +1343,33 @@ declare module _ {
         * @see _.rest
         **/
         drop<W, T>(
+            array: Array<T>,
+            whereValue: W): T[];
+
+        /**
+        * @see _.rest
+        **/
+        drop<W, T>(
             array: List<T>,
             whereValue: W): T[];
 
         /**
         * @see _.rest
         **/
+        tail<T>(array: Array<T>): T[];
+
+        /**
+        * @see _.rest
+        **/
         tail<T>(array: List<T>): T[];
+
+        /**
+        * @see _.rest
+        **/
+        tail<T>(
+            array: Array<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): T[];
 
         /**
         * @see _.rest
@@ -903,7 +1383,7 @@ declare module _ {
         * @see _.rest
         **/
         tail<T>(
-            array: List<T>,
+            array: Array<T>,
             n: number): T[];
 
         /**
@@ -911,7 +1391,28 @@ declare module _ {
         **/
         tail<T>(
             array: List<T>,
+            n: number): T[];
+
+        /**
+        * @see _.rest
+        **/
+        tail<T>(
+            array: Array<T>,
             pluckValue: string): T[];
+
+        /**
+        * @see _.rest
+        **/
+        tail<T>(
+            array: List<T>,
+            pluckValue: string): T[];
+
+        /**
+        * @see _.rest
+        **/
+        tail<W, T>(
+            array: Array<T>,
+            whereValue: W): T[];
 
         /**
         * @see _.rest
@@ -940,6 +1441,15 @@ declare module _ {
         * @return The index at which value should be inserted into array.
         **/
         sortedIndex<T, TSort>(
+            array: Array<T>,
+            value: T,
+            callback?: (x: T) => TSort,
+            thisArg?: any): number;
+
+        /**
+        * @see _.sortedIndex
+        **/
+        sortedIndex<T, TSort>(
             array: List<T>,
             value: T,
             callback?: (x: T) => TSort,
@@ -950,9 +1460,27 @@ declare module _ {
         * @param pluckValue the _.pluck style callback
         **/
         sortedIndex<T>(
+            array: Array<T>,
+            value: T,
+            pluckValue: string): number;
+
+        /**
+        * @see _.sortedIndex
+        * @param pluckValue the _.pluck style callback
+        **/
+        sortedIndex<T>(
             array: List<T>,
             value: T,
             pluckValue: string): number;
+
+        /**
+        * @see _.sortedIndex
+        * @param pluckValue the _.where style callback
+        **/
+        sortedIndex<W, T>(
+            array: Array<T>,
+            value: T,
+            whereValue: W): number;
 
         /**
         * @see _.sortedIndex
@@ -971,6 +1499,11 @@ declare module _ {
         * equality for comparisons, i.e. ===.
         * @param arrays The arrays to inspect.
         * @return Returns an array of composite values.
+        **/
+        union<T>(...arrays: Array<T>[]): T[];
+
+        /**
+        * @see _.union
         **/
         union<T>(...arrays: List<T>[]): T[];
     }
@@ -995,11 +1528,36 @@ declare module _ {
         * @param context 'this' object in `iterator`, optional.
         * @return Copy of `array` where all elements are unique.
         **/
+        uniq<T, TSort>(array: Array<T>, isSorted?: boolean): T[];
+
+        /**
+        * @see _.uniq
+        **/
         uniq<T, TSort>(array: List<T>, isSorted?: boolean): T[];
 
+        /**
+        * @see _.uniq
+        **/
+        uniq<T, TSort>(
+            array: Array<T>,
+            isSorted: boolean,
+            callback: ListIterator<T, TSort>,
+            thisArg?: any): T[];
+
+        /**
+        * @see _.uniq
+        **/
         uniq<T, TSort>(
             array: List<T>,
             isSorted: boolean,
+            callback: ListIterator<T, TSort>,
+            thisArg?: any): T[];
+
+        /**
+        * @see _.uniq
+        **/
+        uniq<T, TSort>(
+            array: Array<T>,
             callback: ListIterator<T, TSort>,
             thisArg?: any): T[];
 
@@ -1016,13 +1574,43 @@ declare module _ {
         * @param pluckValue _.pluck style callback
         **/
         uniq<T>(
+            array: Array<T>,
+            isSorted: boolean,
+            pluckValue: string): T[];
+
+        /**
+        * @see _.uniq
+        * @param pluckValue _.pluck style callback
+        **/
+        uniq<T>(
             array: List<T>,
             isSorted: boolean,
             pluckValue: string): T[];
 
+        /**
+        * @see _.uniq
+        * @param pluckValue _.pluck style callback
+        **/
+        uniq<T>(
+            array: Array<T>,
+            pluckValue: string): T[];
+
+        /**
+        * @see _.uniq
+        * @param pluckValue _.pluck style callback
+        **/
         uniq<T>(
             array: List<T>,
             pluckValue: string): T[];
+
+        /**
+        * @see _.uniq
+        * @param whereValue _.where style callback
+        **/
+        uniq<W, T>(
+            array: Array<T>,
+            isSorted: boolean,
+            whereValue: W): T[];
 
         /**
         * @see _.uniq
@@ -1033,6 +1621,18 @@ declare module _ {
             isSorted: boolean,
             whereValue: W): T[];
 
+        /**
+        * @see _.uniq
+        * @param whereValue _.where style callback
+        **/
+        uniq<W, T>(
+            array: Array<T>,
+            whereValue: W): T[];
+
+        /**
+        * @see _.uniq
+        * @param whereValue _.where style callback
+        **/
         uniq<W, T>(
             array: List<T>,
             whereValue: W): T[];
@@ -1040,10 +1640,35 @@ declare module _ {
         /**
         * @see _.uniq
         **/
+        unique<T>(array: Array<T>, isSorted?: boolean): T[];
+
+        /**
+        * @see _.uniq
+        **/
         unique<T>(array: List<T>, isSorted?: boolean): T[];
 
+        /**
+        * @see _.uniq
+        **/
+        unique<T, TSort>(
+            array: Array<T>,
+            callback: ListIterator<T, TSort>,
+            thisArg?: any): T[];
+
+        /**
+        * @see _.uniq
+        **/
         unique<T, TSort>(
             array: List<T>,
+            callback: ListIterator<T, TSort>,
+            thisArg?: any): T[];
+
+        /**
+        * @see _.uniq
+        **/
+        unique<T, TSort>(
+            array: Array<T>,
+            isSorted: boolean,
             callback: ListIterator<T, TSort>,
             thisArg?: any): T[];
 
@@ -1061,10 +1686,31 @@ declare module _ {
         * @param pluckValue _.pluck style callback
         **/
         unique<T>(
+            array: Array<T>,
+            isSorted: boolean,
+            pluckValue: string): T[];
+
+        /**
+        * @see _.uniq
+        * @param pluckValue _.pluck style callback
+        **/
+        unique<T>(
             array: List<T>,
             isSorted: boolean,
             pluckValue: string): T[];
 
+        /**
+        * @see _.uniq
+        * @param pluckValue _.pluck style callback
+        **/
+        unique<T>(
+            array: Array<T>,
+            pluckValue: string): T[];
+
+        /**
+        * @see _.uniq
+        * @param pluckValue _.pluck style callback
+        **/
         unique<T>(
             array: List<T>,
             pluckValue: string): T[];
@@ -1074,9 +1720,30 @@ declare module _ {
         * @param whereValue _.where style callback
         **/
         unique<W, T>(
+            array: Array<T>,
+            whereValue?: W): T[];
+
+        /**
+        * @see _.uniq
+        * @param whereValue _.where style callback
+        **/
+        unique<W, T>(
             array: List<T>,
             whereValue?: W): T[];
 
+        /**
+        * @see _.uniq
+        * @param whereValue _.where style callback
+        **/
+        unique<W, T>(
+            array: Array<T>,
+            isSorted: boolean,
+            whereValue?: W): T[];
+
+        /**
+        * @see _.uniq
+        * @param whereValue _.where style callback
+        **/
         unique<W, T>(
             array: List<T>,
             isSorted: boolean,
@@ -1090,6 +1757,13 @@ declare module _ {
         * @param array The array to filter.
         * @param values The value(s) to exclude.
         * @return A new array of filtered values.
+        **/
+        without<T>(
+            array: Array<T>,
+            ...values: T[]): T[];
+
+        /**
+        * @see _.without
         **/
         without<T>(
             array: List<T>,
@@ -1160,14 +1834,42 @@ declare module _ {
         * @return A new array of elements corresponding to the provided indexes.
         **/
         at<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
             indexes: number[]): T[];
 
         /**
         * @see _.at
         **/
         at<T>(
-            collection: Collection<T>,
+            collection: List<T>,
+            indexes: number[]): T[];
+
+        /**
+        * @see _.at
+        **/
+        at<T>(
+            collection: Dictionary<T>,
+            indexes: number[]): T[];
+
+        /**
+        * @see _.at
+        **/
+        at<T>(
+            collection: Array<T>,
+            ...indexes: number[]): T[];
+
+        /**
+        * @see _.at
+        **/
+        at<T>(
+            collection: List<T>,
+            ...indexes: number[]): T[];
+
+        /**
+        * @see _.at
+        **/
+        at<T>(
+            collection: Dictionary<T>,
             ...indexes: number[]): T[];
     }
 
@@ -1182,7 +1884,15 @@ declare module _ {
         * @return True if the target element is found, else false.
         **/
         contains<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            target: T,
+            fromIndex?: number): boolean;
+
+        /**
+        * @see _.contains
+        **/
+        contains<T>(
+            collection: List<T>,
             target: T,
             fromIndex?: number): boolean;
 
@@ -1210,7 +1920,15 @@ declare module _ {
         * @see _.contains
         **/
         include<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            target: T,
+            fromIndex?: number): boolean;
+
+        /**
+        * @see _.contains
+        **/
+        include<T>(
+            collection: List<T>,
             target: T,
             fromIndex?: number): boolean;
 
@@ -1250,7 +1968,7 @@ declare module _ {
         * @return Returns the composed aggregate object.
         **/
         countBy<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
             callback?: ListIterator<T, any>,
             thisArg?: any): Dictionary<number>;
 
@@ -1259,7 +1977,43 @@ declare module _ {
         * @param callback Function name
         **/
         countBy<T>(
-            collection: Collection<T>,
+            collection: List<T>,
+            callback?: ListIterator<T, any>,
+            thisArg?: any): Dictionary<number>;
+
+        /**
+        * @see _.countBy
+        * @param callback Function name
+        **/
+        countBy<T>(
+            collection: Dictionary<T>,
+            callback?: ListIterator<T, any>,
+            thisArg?: any): Dictionary<number>;
+
+        /**
+        * @see _.countBy
+        * @param callback Function name
+        **/
+        countBy<T>(
+            collection: Array<T>,
+            callback: string,
+            thisArg?: any): Dictionary<number>;
+
+        /**
+        * @see _.countBy
+        * @param callback Function name
+        **/
+        countBy<T>(
+            collection: List<T>,
+            callback: string,
+            thisArg?: any): Dictionary<number>;
+
+        /**
+        * @see _.countBy
+        * @param callback Function name
+        **/
+        countBy<T>(
+            collection: Dictionary<T>,
             callback: string,
             thisArg?: any): Dictionary<number>;
     }
@@ -1268,7 +2022,7 @@ declare module _ {
         /**
         * @see _.countBy
         **/
-        countBy<T>(
+        countBy(
             callback?: ListIterator<T, any>,
             thisArg?: any): LoDashObjectWrapper<Dictionary<number>>;
 
@@ -1276,7 +2030,7 @@ declare module _ {
         * @see _.countBy
         * @param callback Function name
         **/
-        countBy<T>(
+        countBy(
             callback: string,
             thisArg?: any): LoDashObjectWrapper<Dictionary<number>>;
     }
@@ -1299,7 +2053,7 @@ declare module _ {
         * @return True if all elements passed the callback check, else false.
         **/
         every<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
             callback?: ListIterator<T, boolean>,
             thisArg?: any): boolean;
 
@@ -1308,7 +2062,41 @@ declare module _ {
         * @param pluckValue _.pluck style callback
         **/
         every<T>(
-            collection: Collection<T>,
+            collection: List<T>,
+            callback?: ListIterator<T, boolean>,
+            thisArg?: any): boolean;
+
+        /**
+        * @see _.every
+        * @param pluckValue _.pluck style callback
+        **/
+        every<T>(
+            collection: Dictionary<T>,
+            callback?: ListIterator<T, boolean>,
+            thisArg?: any): boolean;
+
+        /**
+        * @see _.every
+        * @param pluckValue _.pluck style callback
+        **/
+        every<T>(
+            collection: Array<T>,
+            pluckValue: string): boolean;
+
+        /**
+        * @see _.every
+        * @param pluckValue _.pluck style callback
+        **/
+        every<T>(
+            collection: List<T>,
+            pluckValue: string): boolean;
+
+        /**
+        * @see _.every
+        * @param pluckValue _.pluck style callback
+        **/
+        every<T>(
+            collection: Dictionary<T>,
             pluckValue: string): boolean;
 
         /**
@@ -1316,14 +2104,46 @@ declare module _ {
         * @param whereValue _.where style callback
         **/
         every<W, T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            whereValue: W): boolean;
+
+        /**
+        * @see _.every
+        * @param whereValue _.where style callback
+        **/
+        every<W, T>(
+            collection: List<T>,
+            whereValue: W): boolean;
+
+        /**
+        * @see _.every
+        * @param whereValue _.where style callback
+        **/
+        every<W, T>(
+            collection: Dictionary<T>,
             whereValue: W): boolean;
 
         /**
         * @see _.every
         **/
         all<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            callback?: ListIterator<T, boolean>,
+            thisArg?: any): boolean;
+
+        /**
+        * @see _.every
+        **/
+        all<T>(
+            collection: List<T>,
+            callback?: ListIterator<T, boolean>,
+            thisArg?: any): boolean;
+
+        /**
+        * @see _.every
+        **/
+        all<T>(
+            collection: Dictionary<T>,
             callback?: ListIterator<T, boolean>,
             thisArg?: any): boolean;
 
@@ -1332,7 +2152,23 @@ declare module _ {
         * @param pluckValue _.pluck style callback
         **/
         all<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            pluckValue: string): boolean;
+
+        /**
+        * @see _.every
+        * @param pluckValue _.pluck style callback
+        **/
+        all<T>(
+            collection: List<T>,
+            pluckValue: string): boolean;
+
+        /**
+        * @see _.every
+        * @param pluckValue _.pluck style callback
+        **/
+        all<T>(
+            collection: Dictionary<T>,
             pluckValue: string): boolean;
 
         /**
@@ -1340,7 +2176,23 @@ declare module _ {
         * @param whereValue _.where style callback
         **/
         all<W, T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            whereValue: W): boolean;
+
+        /**
+        * @see _.every
+        * @param whereValue _.where style callback
+        **/
+        all<W, T>(
+            collection: List<T>,
+            whereValue: W): boolean;
+
+        /**
+        * @see _.every
+        * @param whereValue _.where style callback
+        **/
+        all<W, T>(
+            collection: Dictionary<T>,
             whereValue: W): boolean;
     }
 
@@ -1362,7 +2214,23 @@ declare module _ {
         * @return Returns a new array of elements that passed the callback check.
         **/
         filter<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): T[];
+
+        /**
+        * @see _.filter
+        **/
+        filter<T>(
+            collection: List<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): T[];
+
+        /**
+        * @see _.filter
+        **/
+        filter<T>(
+            collection: Dictionary<T>,
             callback: ListIterator<T, boolean>,
             thisArg?: any): T[];
 
@@ -1371,7 +2239,23 @@ declare module _ {
         * @param pluckValue _.pluck style callback
         **/
         filter<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            pluckValue: string): T[];
+
+        /**
+        * @see _.filter
+        * @param pluckValue _.pluck style callback
+        **/
+        filter<T>(
+            collection: List<T>,
+            pluckValue: string): T[];
+
+        /**
+        * @see _.filter
+        * @param pluckValue _.pluck style callback
+        **/
+        filter<T>(
+            collection: Dictionary<T>,
             pluckValue: string): T[];
 
         /**
@@ -1379,14 +2263,46 @@ declare module _ {
         * @param pluckValue _.pluck style callback
         **/
         filter<W, T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            whereValue: W): T[];
+
+        /**
+        * @see _.filter
+        * @param pluckValue _.pluck style callback
+        **/
+        filter<W, T>(
+            collection: List<T>,
+            whereValue: W): T[];
+
+        /**
+        * @see _.filter
+        * @param pluckValue _.pluck style callback
+        **/
+        filter<W, T>(
+            collection: Dictionary<T>,
             whereValue: W): T[];
 
         /**
         * @see _.filter
         **/
         select<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): T[];
+
+        /**
+        * @see _.filter
+        **/
+        select<T>(
+            collection: List<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): T[];
+
+        /**
+        * @see _.filter
+        **/
+        select<T>(
+            collection: Dictionary<T>,
             callback: ListIterator<T, boolean>,
             thisArg?: any): T[];
 
@@ -1395,7 +2311,23 @@ declare module _ {
         * @param pluckValue _.pluck style callback
         **/
         select<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            pluckValue: string): T[];
+
+        /**
+        * @see _.filter
+        * @param pluckValue _.pluck style callback
+        **/
+        select<T>(
+            collection: List<T>,
+            pluckValue: string): T[];
+
+        /**
+        * @see _.filter
+        * @param pluckValue _.pluck style callback
+        **/
+        select<T>(
+            collection: Dictionary<T>,
             pluckValue: string): T[];
 
         /**
@@ -1403,7 +2335,23 @@ declare module _ {
         * @param pluckValue _.pluck style callback
         **/
         select<W, T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            whereValue: W): T[];
+
+        /**
+        * @see _.filter
+        * @param pluckValue _.pluck style callback
+        **/
+        select<W, T>(
+            collection: List<T>,
+            whereValue: W): T[];
+
+        /**
+        * @see _.filter
+        * @param pluckValue _.pluck style callback
+        **/
+        select<W, T>(
+            collection: Dictionary<T>,
             whereValue: W): T[];
     }
 
@@ -1411,7 +2359,7 @@ declare module _ {
         /**
         * @see _.filter
         **/
-        filter<T>(
+        filter(
             callback: ListIterator<T, boolean>,
             thisArg?: any): LoDashArrayWrapper<T>;
 
@@ -1419,20 +2367,20 @@ declare module _ {
         * @see _.filter
         * @param pluckValue _.pluck style callback
         **/
-        filter<T>(
+        filter(
             pluckValue: string): LoDashArrayWrapper<T>;
 
         /**
         * @see _.filter
         * @param pluckValue _.pluck style callback
         **/
-        filter<W, T>(
+        filter<W>(
             whereValue: W): LoDashArrayWrapper<T>;
 
         /**
         * @see _.filter
         **/
-        select<T>(
+        select(
             callback: ListIterator<T, boolean>,
             thisArg?: any): LoDashArrayWrapper<T>;
 
@@ -1440,14 +2388,14 @@ declare module _ {
         * @see _.filter
         * @param pluckValue _.pluck style callback
         **/
-        select<T>(
+        select(
             pluckValue: string): LoDashArrayWrapper<T>;
 
         /**
         * @see _.filter
         * @param pluckValue _.pluck style callback
         **/
-        select<W, T>(
+        select<W>(
             whereValue: W): LoDashArrayWrapper<T>;
     }
 
@@ -1469,9 +2417,33 @@ declare module _ {
         * @return The found element, else undefined.
         **/
         find<T>(
+            collection: Array<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): T;
+
+        /**
+        * @see _.find
+        **/
+        find<T>(
             collection: List<T>,
             callback: ListIterator<T, boolean>,
             thisArg?: any): T;
+
+        /**
+        * @see _.find
+        **/
+        find<T>(
+            collection: Dictionary<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): T;
+
+        /**
+        * @see _.find
+        * @param _.pluck style callback
+        **/
+        find<W, T>(
+            collection: Array<T>,
+            whereValue: W): T;
 
         /**
         * @see _.find
@@ -1483,6 +2455,22 @@ declare module _ {
 
         /**
         * @see _.find
+        * @param _.pluck style callback
+        **/
+        find<W, T>(
+            collection: Dictionary<T>,
+            whereValue: W): T;
+
+        /**
+        * @see _.find
+        * @param _.where style callback
+        **/
+        find<T>(
+            collection: Array<T>,
+            pluckValue: string): T;
+
+        /**
+        * @see _.find
         * @param _.where style callback
         **/
         find<T>(
@@ -1491,9 +2479,33 @@ declare module _ {
 
         /**
         * @see _.find
+        * @param _.where style callback
+        **/
+        find<T>(
+            collection: Dictionary<T>,
+            pluckValue: string): T;
+
+        /**
+        * @see _.find
         **/
         detect<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): T;
+
+        /**
+        * @see _.find
+        **/
+        detect<T>(
+            collection: List<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): T;
+
+        /**
+        * @see _.find
+        **/
+        detect<T>(
+            collection: Dictionary<T>,
             callback: ListIterator<T, boolean>,
             thisArg?: any): T;
 
@@ -1502,7 +2514,23 @@ declare module _ {
         * @param _.pluck style callback
         **/
         detect<W, T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            whereValue: W): T;
+
+        /**
+        * @see _.find
+        * @param _.pluck style callback
+        **/
+        detect<W, T>(
+            collection: List<T>,
+            whereValue: W): T;
+
+        /**
+        * @see _.find
+        * @param _.pluck style callback
+        **/
+        detect<W, T>(
+            collection: Dictionary<T>,
             whereValue: W): T;
 
         /**
@@ -1510,14 +2538,46 @@ declare module _ {
         * @param _.where style callback
         **/
         detect<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            pluckValue: string): T;
+
+        /**
+        * @see _.find
+        * @param _.where style callback
+        **/
+        detect<T>(
+            collection: List<T>,
+            pluckValue: string): T;
+
+        /**
+        * @see _.find
+        * @param _.where style callback
+        **/
+        detect<T>(
+            collection: Dictionary<T>,
             pluckValue: string): T;
 
         /**
         * @see _.find
         **/
         findWhere<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): T;
+
+        /**
+        * @see _.find
+        **/
+        findWhere<T>(
+            collection: List<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): T;
+
+        /**
+        * @see _.find
+        **/
+        findWhere<T>(
+            collection: Dictionary<T>,
             callback: ListIterator<T, boolean>,
             thisArg?: any): T;
 
@@ -1526,7 +2586,23 @@ declare module _ {
         * @param _.pluck style callback
         **/
         findWhere<W, T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            whereValue: W): T;
+
+        /**
+        * @see _.find
+        * @param _.pluck style callback
+        **/
+        findWhere<W, T>(
+            collection: List<T>,
+            whereValue: W): T;
+
+        /**
+        * @see _.find
+        * @param _.pluck style callback
+        **/
+        findWhere<W, T>(
+            collection: Dictionary<T>,
             whereValue: W): T;
 
         /**
@@ -1534,7 +2610,23 @@ declare module _ {
         * @param _.where style callback
         **/
         findWhere<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            pluckValue: string): T;
+
+        /**
+        * @see _.find
+        * @param _.where style callback
+        **/
+        findWhere<T>(
+            collection: List<T>,
+            pluckValue: string): T;
+
+        /**
+        * @see _.find
+        * @param _.where style callback
+        **/
+        findWhere<T>(
+            collection: Dictionary<T>,
             pluckValue: string): T;
     }
 
@@ -1549,7 +2641,23 @@ declare module _ {
         * @return The found element, else undefined.
         **/
         findLast<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): T;
+
+        /**
+        * @see _.find
+        **/
+        findLast<T>(
+            collection: List<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): T;
+
+        /**
+        * @see _.find
+        **/
+        findLast<T>(
+            collection: Dictionary<T>,
             callback: ListIterator<T, boolean>,
             thisArg?: any): T;
 
@@ -1558,7 +2666,23 @@ declare module _ {
         * @param _.pluck style callback
         **/
         findLast<W, T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            whereValue: W): T;
+
+        /**
+        * @see _.find
+        * @param _.pluck style callback
+        **/
+        findLast<W, T>(
+            collection: List<T>,
+            whereValue: W): T;
+
+        /**
+        * @see _.find
+        * @param _.pluck style callback
+        **/
+        findLast<W, T>(
+            collection: Dictionary<T>,
             whereValue: W): T;
 
         /**
@@ -1566,7 +2690,23 @@ declare module _ {
         * @param _.where style callback
         **/
         findLast<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            pluckValue: string): T;
+
+        /**
+        * @see _.find
+        * @param _.where style callback
+        **/
+        findLast<T>(
+            collection: List<T>,
+            pluckValue: string): T;
+
+        /**
+        * @see _.find
+        * @param _.where style callback
+        **/
+        findLast<T>(
+            collection: Dictionary<T>,
             pluckValue: string): T;
     }
 
@@ -1581,6 +2721,14 @@ declare module _ {
         * @param thisArg The this binding of callback.
         **/
         forEach<T>(
+            collection: Array<T>,
+            callback: ListIterator<T, void>,
+            thisArg?: any): Array<T>;
+
+        /**
+        * @see _.forEach
+        **/
+        forEach<T>(
             collection: List<T>,
             callback: ListIterator<T, void>,
             thisArg?: any): List<T>;
@@ -1592,6 +2740,14 @@ declare module _ {
             object: Dictionary<T>,
             callback: ObjectIterator<T, void>,
             thisArg?: any): Dictionary<T>;
+
+        /**
+        * @see _.forEach
+        **/
+        each<T>(
+            collection: Array<T>,
+            callback: ListIterator<T, void>,
+            thisArg?: any): Array<T>;
 
         /**
         * @see _.forEach
@@ -1617,14 +2773,14 @@ declare module _ {
         /**
         * @see _.forEach
         **/
-        forEach<T>(
+        forEach(
             callback: ListIterator<T, void>,
             thisArg?: any): LoDashArrayWrapper<T>;
 
         /**
         * @see _.forEach
         **/
-        each<T>(
+        each(
             callback: ListIterator<T, void>,
             thisArg?: any): LoDashArrayWrapper<T>;
     }
@@ -1655,6 +2811,14 @@ declare module _ {
         * @param thisArg The this binding of callback.
         **/
         forEachRight<T>(
+            collection: Array<T>,
+            callback: ListIterator<T, void>,
+            thisArg?: any): Array<T>;
+
+        /**
+        * @see _.forEachRight
+        **/
+        forEachRight<T>(
             collection: List<T>,
             callback: ListIterator<T, void>,
             thisArg?: any): List<T>;
@@ -1666,6 +2830,14 @@ declare module _ {
             object: Dictionary<T>,
             callback: ObjectIterator<T, void>,
             thisArg?: any): Dictionary<T>;
+
+        /**
+        * @see _.forEachRight
+        **/
+        eachRight<T>(
+            collection: Array<T>,
+            callback: ListIterator<T, void>,
+            thisArg?: any): Array<T>;
 
         /**
         * @see _.forEachRight
@@ -1691,14 +2863,14 @@ declare module _ {
         /**
         * @see _.forEachRight
         **/
-        forEachRight<T>(
+        forEachRight(
             callback: ListIterator<T, void>,
             thisArg?: any): LoDashArrayWrapper<T>;
 
         /**
         * @see _.forEachRight
         **/
-        eachRight<T>(
+        eachRight(
             callback: ListIterator<T, void>,
             thisArg?: any): LoDashArrayWrapper<T>;
     }
@@ -1740,9 +2912,25 @@ declare module _ {
         * @return Returns the composed aggregate object.
         **/
         groupBy<T>(
+            collection: Array<T>,
+            callback?: ListIterator<T, any>,
+            thisArg?: any): Dictionary<T[]>;
+
+        /**
+        * @see _.groupBy
+        **/
+        groupBy<T>(
             collection: List<T>,
             callback?: ListIterator<T, any>,
             thisArg?: any): Dictionary<T[]>;
+
+        /**
+        * @see _.groupBy
+        * @param pluckValue _.pluck style callback
+        **/
+        groupBy<T>(
+            collection: Array<T>,
+            pluckValue: string): Dictionary<T[]>;
 
         /**
         * @see _.groupBy
@@ -1757,6 +2945,14 @@ declare module _ {
         * @param whereValue _.where style callback
         **/
         groupBy<W, T>(
+            collection: Array<T>,
+            whereValue: W): Dictionary<T[]>;
+
+        /**
+        * @see _.groupBy
+        * @param whereValue _.where style callback
+        **/
+        groupBy<W, T>(
             collection: List<T>,
             whereValue: W): Dictionary<T[]>;
     }
@@ -1765,20 +2961,20 @@ declare module _ {
         /**
         * @see _.groupBy
         **/
-        groupBy<T>(
+        groupBy(
             callback: ListIterator<T, any>,
             thisArg?: any): _.LoDashObjectWrapper<Dictionary<T[]>>;
 
         /**
         * @see _.groupBy
         **/
-        groupBy<T>(
+        groupBy(
             pluckValue: string): _.LoDashObjectWrapper<Dictionary<T[]>>;
 
         /**
         * @see _.groupBy
         **/
-        groupBy<W, T>(
+        groupBy<W>(
             whereValue: W): _.LoDashObjectWrapper<Dictionary<T[]>>;
     }
 
@@ -1801,6 +2997,14 @@ declare module _ {
         * @return Returns the composed aggregate object.
         **/
         indexBy<T>(
+            list: Array<T>,
+            iterator: ListIterator<T, any>,
+            context?: any): Dictionary<T>;
+
+        /**
+        * @see _.indexBy
+        **/
+        indexBy<T>(
             list: List<T>,
             iterator: ListIterator<T, any>,
             context?: any): Dictionary<T>;
@@ -1810,8 +3014,24 @@ declare module _ {
         * @param pluckValue _.pluck style callback
         **/
         indexBy<T>(
+            collection: Array<T>,
+            pluckValue: string): Dictionary<T>;
+
+        /**
+        * @see _.indexBy
+        * @param pluckValue _.pluck style callback
+        **/
+        indexBy<T>(
             collection: List<T>,
             pluckValue: string): Dictionary<T>;
+
+        /**
+        * @see _.indexBy
+        * @param whereValue _.where style callback
+        **/
+        indexBy<W, T>(
+            collection: Array<T>,
+            whereValue: W): Dictionary<T>;
 
         /**
         * @see _.indexBy
@@ -1834,7 +3054,7 @@ declare module _ {
         * @param args Arguments to invoke the method with.
         **/
         invoke<T extends {}>(
-            collection: Collection<T>,
+            collection: Array<T>,
             methodName: string,
             ...args: any[]): any;
 
@@ -1842,7 +3062,39 @@ declare module _ {
         * @see _.invoke
         **/
         invoke<T extends {}>(
-            collection: Collection<T>,
+            collection: List<T>,
+            methodName: string,
+            ...args: any[]): any;
+
+        /**
+        * @see _.invoke
+        **/
+        invoke<T extends {}>(
+            collection: Dictionary<T>,
+            methodName: string,
+            ...args: any[]): any;
+
+        /**
+        * @see _.invoke
+        **/
+        invoke<T extends {}>(
+            collection: Array<T>,
+            method: Function,
+            ...args: any[]): any;
+
+        /**
+        * @see _.invoke
+        **/
+        invoke<T extends {}>(
+            collection: List<T>,
+            method: Function,
+            ...args: any[]): any;
+
+        /**
+        * @see _.invoke
+        **/
+        invoke<T extends {}>(
+            collection: Dictionary<T>,
             method: Function,
             ...args: any[]): any;
     }
@@ -1863,6 +3115,14 @@ declare module _ {
         * @param callback The function called per iteration.
         * @param theArg The this binding of callback.
         * @return The mapped array result.
+        **/
+        map<T, TResult>(
+            collection: Array<T>,
+            callback: ListIterator<T, TResult>,
+            thisArg?: any): TResult[];
+
+        /**
+        * @see _.map
         **/
         map<T, TResult>(
             collection: List<T>,
@@ -1886,8 +3146,24 @@ declare module _ {
         * @param pluckValue _.pluck style callback
         **/
         map<T, TResult>(
+            collection: Array<T>,
+            pluckValue: string): TResult[];
+
+        /**
+        * @see _.map
+        * @param pluckValue _.pluck style callback
+        **/
+        map<T, TResult>(
             collection: List<T>,
             pluckValue: string): TResult[];
+
+        /**
+        * @see _.map
+        **/
+        collect<T, TResult>(
+            collection: Array<T>,
+            callback: ListIterator<T, TResult>,
+            thisArg?: any): TResult[];
 
         /**
         * @see _.map
@@ -1909,6 +3185,13 @@ declare module _ {
         * @see _.map
         **/
         collect<T, TResult>(
+            collection: Array<T>,
+            pluckValue: string): TResult[];
+
+        /**
+        * @see _.map
+        **/
+        collect<T, TResult>(
             collection: List<T>,
             pluckValue: string): TResult[];
     }
@@ -1917,7 +3200,7 @@ declare module _ {
         /**
         * @see _.map
         **/
-        map<T, TResult>(
+        map<TResult>(
             callback: ListIterator<T, TResult>,
             thisArg?: any): LoDashArrayWrapper<TResult>;
 
@@ -1925,20 +3208,20 @@ declare module _ {
         * @see _.map
         * @param pluckValue _.pluck style callback
         **/
-        map<T, TResult>(
+        map<TResult>(
             pluckValue: string): LoDashArrayWrapper<TResult>;
 
         /**
         * @see _.map
         **/
-        collect<T, TResult>(
+        collect<TResult>(
             callback: ListIterator<T, TResult>,
             thisArg?: any): LoDashArrayWrapper<TResult>;
 
         /**
         * @see _.map
         **/
-        collect<T, TResult>(
+        collect<TResult>(
             pluckValue: string): LoDashArrayWrapper<TResult>;
     }
 
@@ -1948,14 +3231,14 @@ declare module _ {
         **/
         map<T extends {}, TResult>(
             callback: ObjectIterator<T, TResult>,
-            thisArg?: any): LoDashObjectWrapper<TResult>;
+            thisArg?: any): LoDashArrayWrapper<TResult>;
 
         /**
         * @see _.map
         **/
         collect<T extends {}, TResult>(
             callback: ObjectIterator<T, TResult>,
-            thisArg?: any): LoDashObjectWrapper<TResult>;
+            thisArg?: any): LoDashArrayWrapper<TResult>;
     }
 
     //_.max
@@ -1977,7 +3260,23 @@ declare module _ {
         * @return Returns the maximum value.
         **/
         max<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            callback?: ListIterator<T, any>,
+            thisArg?: any): T;
+
+        /**
+        * @see _.max
+        **/
+        max<T>(
+            collection: List<T>,
+            callback?: ListIterator<T, any>,
+            thisArg?: any): T;
+
+        /**
+        * @see _.max
+        **/
+        max<T>(
+            collection: Dictionary<T>,
             callback?: ListIterator<T, any>,
             thisArg?: any): T;
 
@@ -1986,7 +3285,23 @@ declare module _ {
         * @param pluckValue _.pluck style callback
         **/
         max<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            pluckValue: string): T;
+
+        /**
+        * @see _.max
+        * @param pluckValue _.pluck style callback
+        **/
+        max<T>(
+            collection: List<T>,
+            pluckValue: string): T;
+
+        /**
+        * @see _.max
+        * @param pluckValue _.pluck style callback
+        **/
+        max<T>(
+            collection: Dictionary<T>,
             pluckValue: string): T;
 
         /**
@@ -1994,7 +3309,23 @@ declare module _ {
         * @param whereValue _.where style callback
         **/
         max<W, T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            whereValue: W): T;
+
+        /**
+        * @see _.max
+        * @param whereValue _.where style callback
+        **/
+        max<W, T>(
+            collection: List<T>,
+            whereValue: W): T;
+
+        /**
+        * @see _.max
+        * @param whereValue _.where style callback
+        **/
+        max<W, T>(
+            collection: Dictionary<T>,
             whereValue: W): T;
     }
 
@@ -2017,7 +3348,23 @@ declare module _ {
         * @return Returns the maximum value.
         **/
         min<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            callback?: ListIterator<T, any>,
+            thisArg?: any): T;
+
+        /**
+        * @see _.min
+        **/
+        min<T>(
+            collection: List<T>,
+            callback?: ListIterator<T, any>,
+            thisArg?: any): T;
+
+        /**
+        * @see _.min
+        **/
+        min<T>(
+            collection: Dictionary<T>,
             callback?: ListIterator<T, any>,
             thisArg?: any): T;
 
@@ -2026,7 +3373,23 @@ declare module _ {
         * @param pluckValue _.pluck style callback
         **/
         min<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            pluckValue: string): T;
+
+        /**
+        * @see _.min
+        * @param pluckValue _.pluck style callback
+        **/
+        min<T>(
+            collection: List<T>,
+            pluckValue: string): T;
+
+        /**
+        * @see _.min
+        * @param pluckValue _.pluck style callback
+        **/
+        min<T>(
+            collection: Dictionary<T>,
             pluckValue: string): T;
 
         /**
@@ -2034,7 +3397,23 @@ declare module _ {
         * @param whereValue _.where style callback
         **/
         min<W, T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            whereValue: W): T;
+
+        /**
+        * @see _.min
+        * @param whereValue _.where style callback
+        **/
+        min<W, T>(
+            collection: List<T>,
+            whereValue: W): T;
+
+        /**
+        * @see _.min
+        * @param whereValue _.where style callback
+        **/
+        min<W, T>(
+            collection: Dictionary<T>,
             whereValue: W): T;
     }
 
@@ -2047,7 +3426,21 @@ declare module _ {
         * @return A new array of property values.
         **/
         pluck<T extends {}>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            property: string): any[];
+
+        /**
+        * @see _.pluck
+        **/
+        pluck<T extends {}>(
+            collection: List<T>,
+            property: string): any[];
+
+        /**
+        * @see _.pluck
+        **/
+        pluck<T extends {}>(
+            collection: Dictionary<T>,
             property: string): any[];
     }
 
@@ -2066,7 +3459,7 @@ declare module _ {
         * @return Returns the accumulated value.
         **/
         reduce<T, TResult>(
-            collection: Collection<T>,
+            collection: Array<T>,
             callback: MemoIterator<T, TResult>,
             accumulator: TResult,
             thisArg?: any): TResult;
@@ -2075,7 +3468,41 @@ declare module _ {
         * @see _.reduce
         **/
         reduce<T, TResult>(
-            collection: Collection<T>,
+            collection: List<T>,
+            callback: MemoIterator<T, TResult>,
+            accumulator: TResult,
+            thisArg?: any): TResult;
+
+        /**
+        * @see _.reduce
+        **/
+        reduce<T, TResult>(
+            collection: Dictionary<T>,
+            callback: MemoIterator<T, TResult>,
+            accumulator: TResult,
+            thisArg?: any): TResult;
+
+        /**
+        * @see _.reduce
+        **/
+        reduce<T, TResult>(
+            collection: Array<T>,
+            callback: MemoIterator<T, TResult>,
+            thisArg?: any): TResult;
+
+        /**
+        * @see _.reduce
+        **/
+        reduce<T, TResult>(
+            collection: List<T>,
+            callback: MemoIterator<T, TResult>,
+            thisArg?: any): TResult;
+
+        /**
+        * @see _.reduce
+        **/
+        reduce<T, TResult>(
+            collection: Dictionary<T>,
             callback: MemoIterator<T, TResult>,
             thisArg?: any): TResult;
 
@@ -2083,7 +3510,7 @@ declare module _ {
         * @see _.reduce
         **/
         inject<T, TResult>(
-            collection: Collection<T>,
+            collection: Array<T>,
             callback: MemoIterator<T, TResult>,
             accumulator: TResult,
             thisArg?: any): TResult;
@@ -2092,7 +3519,41 @@ declare module _ {
         * @see _.reduce
         **/
         inject<T, TResult>(
-            collection: Collection<T>,
+            collection: List<T>,
+            callback: MemoIterator<T, TResult>,
+            accumulator: TResult,
+            thisArg?: any): TResult;
+
+        /**
+        * @see _.reduce
+        **/
+        inject<T, TResult>(
+            collection: Dictionary<T>,
+            callback: MemoIterator<T, TResult>,
+            accumulator: TResult,
+            thisArg?: any): TResult;
+
+        /**
+        * @see _.reduce
+        **/
+        inject<T, TResult>(
+            collection: Array<T>,
+            callback: MemoIterator<T, TResult>,
+            thisArg?: any): TResult;
+
+        /**
+        * @see _.reduce
+        **/
+        inject<T, TResult>(
+            collection: List<T>,
+            callback: MemoIterator<T, TResult>,
+            thisArg?: any): TResult;
+
+        /**
+        * @see _.reduce
+        **/
+        inject<T, TResult>(
+            collection: Dictionary<T>,
             callback: MemoIterator<T, TResult>,
             thisArg?: any): TResult;
 
@@ -2100,7 +3561,7 @@ declare module _ {
         * @see _.reduce
         **/
         foldl<T, TResult>(
-            collection: Collection<T>,
+            collection: Array<T>,
             callback: MemoIterator<T, TResult>,
             accumulator: TResult,
             thisArg?: any): TResult;
@@ -2109,7 +3570,41 @@ declare module _ {
         * @see _.reduce
         **/
         foldl<T, TResult>(
-            collection: Collection<T>,
+            collection: List<T>,
+            callback: MemoIterator<T, TResult>,
+            accumulator: TResult,
+            thisArg?: any): TResult;
+
+        /**
+        * @see _.reduce
+        **/
+        foldl<T, TResult>(
+            collection: Dictionary<T>,
+            callback: MemoIterator<T, TResult>,
+            accumulator: TResult,
+            thisArg?: any): TResult;
+
+        /**
+        * @see _.reduce
+        **/
+        foldl<T, TResult>(
+            collection: Array<T>,
+            callback: MemoIterator<T, TResult>,
+            thisArg?: any): TResult;
+
+        /**
+        * @see _.reduce
+        **/
+        foldl<T, TResult>(
+            collection: List<T>,
+            callback: MemoIterator<T, TResult>,
+            thisArg?: any): TResult;
+
+        /**
+        * @see _.reduce
+        **/
+        foldl<T, TResult>(
+            collection: Dictionary<T>,
             callback: MemoIterator<T, TResult>,
             thisArg?: any): TResult;
     }
@@ -2126,7 +3621,7 @@ declare module _ {
         * @return The accumulated value.
         **/
         reduceRight<T, TResult>(
-            collection: Collection<T>,
+            collection: Array<T>,
             callback: MemoIterator<T, TResult>,
             accumulator: TResult,
             thisArg?: any): TResult;
@@ -2135,7 +3630,41 @@ declare module _ {
         * @see _.reduceRight
         **/
         reduceRight<T, TResult>(
-            collection: Collection<T>,
+            collection: List<T>,
+            callback: MemoIterator<T, TResult>,
+            accumulator: TResult,
+            thisArg?: any): TResult;
+
+        /**
+        * @see _.reduceRight
+        **/
+        reduceRight<T, TResult>(
+            collection: Dictionary<T>,
+            callback: MemoIterator<T, TResult>,
+            accumulator: TResult,
+            thisArg?: any): TResult;
+
+        /**
+        * @see _.reduceRight
+        **/
+        reduceRight<T, TResult>(
+            collection: Array<T>,
+            callback: MemoIterator<T, TResult>,
+            thisArg?: any): TResult;
+
+        /**
+        * @see _.reduceRight
+        **/
+        reduceRight<T, TResult>(
+            collection: List<T>,
+            callback: MemoIterator<T, TResult>,
+            thisArg?: any): TResult;
+
+        /**
+        * @see _.reduceRight
+        **/
+        reduceRight<T, TResult>(
+            collection: Dictionary<T>,
             callback: MemoIterator<T, TResult>,
             thisArg?: any): TResult;
 
@@ -2143,7 +3672,7 @@ declare module _ {
         * @see _.reduceRight
         **/
         foldr<T, TResult>(
-            collection: Collection<T>,
+            collection: Array<T>,
             callback: MemoIterator<T, TResult>,
             accumulator: TResult,
             thisArg?: any): TResult;
@@ -2152,7 +3681,41 @@ declare module _ {
         * @see _.reduceRight
         **/
         foldr<T, TResult>(
-            collection: Collection<T>,
+            collection: List<T>,
+            callback: MemoIterator<T, TResult>,
+            accumulator: TResult,
+            thisArg?: any): TResult;
+
+        /**
+        * @see _.reduceRight
+        **/
+        foldr<T, TResult>(
+            collection: Dictionary<T>,
+            callback: MemoIterator<T, TResult>,
+            accumulator: TResult,
+            thisArg?: any): TResult;
+
+        /**
+        * @see _.reduceRight
+        **/
+        foldr<T, TResult>(
+            collection: Array<T>,
+            callback: MemoIterator<T, TResult>,
+            thisArg?: any): TResult;
+
+        /**
+        * @see _.reduceRight
+        **/
+        foldr<T, TResult>(
+            collection: List<T>,
+            callback: MemoIterator<T, TResult>,
+            thisArg?: any): TResult;
+
+        /**
+        * @see _.reduceRight
+        **/
+        foldr<T, TResult>(
+            collection: Dictionary<T>,
             callback: MemoIterator<T, TResult>,
             thisArg?: any): TResult;
     }
@@ -2174,7 +3737,23 @@ declare module _ {
         * @return A new array of elements that failed the callback check.
         **/
         reject<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): T[];
+
+        /**
+        * @see _.reject
+        **/
+        reject<T>(
+            collection: List<T>,
+            callback: ListIterator<T, boolean>,
+            thisArg?: any): T[];
+
+        /**
+        * @see _.reject
+        **/
+        reject<T>(
+            collection: Dictionary<T>,
             callback: ListIterator<T, boolean>,
             thisArg?: any): T[];
 
@@ -2183,7 +3762,23 @@ declare module _ {
         * @param pluckValue _.pluck style callback
         **/
         reject<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            pluckValue: string): T[];
+
+        /**
+        * @see _.reject
+        * @param pluckValue _.pluck style callback
+        **/
+        reject<T>(
+            collection: List<T>,
+            pluckValue: string): T[];
+
+        /**
+        * @see _.reject
+        * @param pluckValue _.pluck style callback
+        **/
+        reject<T>(
+            collection: Dictionary<T>,
             pluckValue: string): T[];
 
         /**
@@ -2191,7 +3786,23 @@ declare module _ {
         * @param whereValue _.where style callback
         **/
         reject<W, T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            whereValue: W): T[];
+
+        /**
+        * @see _.reject
+        * @param whereValue _.where style callback
+        **/
+        reject<W, T>(
+            collection: List<T>,
+            whereValue: W): T[];
+
+        /**
+        * @see _.reject
+        * @param whereValue _.where style callback
+        **/
+        reject<W, T>(
+            collection: Dictionary<T>,
             whereValue: W): T[];
     }
 
@@ -2202,13 +3813,35 @@ declare module _ {
         * @param collection The collection to sample.
         * @return Returns the random sample(s) of collection.
         **/
-        sample<T>(collection: Collection<T>): T;
+        sample<T>(collection: Array<T>): T;
+
+        /**
+        * @see _.sample
+        **/
+        sample<T>(collection: List<T>): T;
+
+        /**
+        * @see _.sample
+        **/
+        sample<T>(collection: Dictionary<T>): T;
 
         /**
         * @see _.sample
         * @param n The number of elements to sample.
         **/
-        sample<T>(collection: Collection<T>, n: number): T[];
+        sample<T>(collection: Array<T>, n: number): T[];
+
+        /**
+        * @see _.sample
+        * @param n The number of elements to sample.
+        **/
+        sample<T>(collection: List<T>, n: number): T[];
+
+        /**
+        * @see _.sample
+        * @param n The number of elements to sample.
+        **/
+        sample<T>(collection: Dictionary<T>, n: number): T[];
     }
 
     //_.shuffle
@@ -2219,7 +3852,17 @@ declare module _ {
         * @param collection The collection to shuffle.
         * @return Returns a new shuffled collection.
         **/
-        shuffle<T>(collection: Collection<T>): T[];
+        shuffle<T>(collection: Array<T>): T[];
+
+        /**
+        * @see _.shuffle
+        **/
+        shuffle<T>(collection: List<T>): T[];
+
+        /**
+        * @see _.shuffle
+        **/
+        shuffle<T>(collection: Dictionary<T>): T[];
     }
 
     //_.size
@@ -2229,6 +3872,11 @@ declare module _ {
         * objects or the number of own enumerable properties for objects.
         * @param collection The collection to inspect.
         * @return collection.length
+        **/
+        size<T>(collection: Array<T>): number;
+
+        /**
+        * @see _.size
         **/
         size<T>(collection: List<T>): number;
 
@@ -2265,7 +3913,23 @@ declare module _ {
         * @return True if any element passed the callback check, else false.
         **/
         some<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            callback?: ListIterator<T, boolean>,
+            thisArg?: any): boolean;
+
+        /**
+        * @see _.some
+        **/
+        some<T>(
+            collection: List<T>,
+            callback?: ListIterator<T, boolean>,
+            thisArg?: any): boolean;
+
+        /**
+        * @see _.some
+        **/
+        some<T>(
+            collection: Dictionary<T>,
             callback?: ListIterator<T, boolean>,
             thisArg?: any): boolean;
 
@@ -2274,7 +3938,23 @@ declare module _ {
         * @param pluckValue _.pluck style callback
         **/
         some<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            pluckValue: string): boolean;
+
+        /**
+        * @see _.some
+        * @param pluckValue _.pluck style callback
+        **/
+        some<T>(
+            collection: List<T>,
+            pluckValue: string): boolean;
+
+        /**
+        * @see _.some
+        * @param pluckValue _.pluck style callback
+        **/
+        some<T>(
+            collection: Dictionary<T>,
             pluckValue: string): boolean;
 
         /**
@@ -2282,14 +3962,46 @@ declare module _ {
         * @param whereValue _.where style callback
         **/
         some<W, T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            whereValue: W): boolean;
+
+        /**
+        * @see _.some
+        * @param whereValue _.where style callback
+        **/
+        some<W, T>(
+            collection: List<T>,
+            whereValue: W): boolean;
+
+        /**
+        * @see _.some
+        * @param whereValue _.where style callback
+        **/
+        some<W, T>(
+            collection: Dictionary<T>,
             whereValue: W): boolean;
 
         /**
         * @see _.some
         **/
         any<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            callback?: ListIterator<T, boolean>,
+            thisArg?: any): boolean;
+
+        /**
+        * @see _.some
+        **/
+        any<T>(
+            collection: List<T>,
+            callback?: ListIterator<T, boolean>,
+            thisArg?: any): boolean;
+
+        /**
+        * @see _.some
+        **/
+        any<T>(
+            collection: Dictionary<T>,
             callback?: ListIterator<T, boolean>,
             thisArg?: any): boolean;
 
@@ -2298,7 +4010,23 @@ declare module _ {
         * @param pluckValue _.pluck style callback
         **/
         any<T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            pluckValue: string): boolean;
+
+        /**
+        * @see _.some
+        * @param pluckValue _.pluck style callback
+        **/
+        any<T>(
+            collection: List<T>,
+            pluckValue: string): boolean;
+
+        /**
+        * @see _.some
+        * @param pluckValue _.pluck style callback
+        **/
+        any<T>(
+            collection: Dictionary<T>,
             pluckValue: string): boolean;
 
         /**
@@ -2306,7 +4034,23 @@ declare module _ {
         * @param whereValue _.where style callback
         **/
         any<W, T>(
-            collection: Collection<T>,
+            collection: Array<T>,
+            whereValue: W): boolean;
+
+        /**
+        * @see _.some
+        * @param whereValue _.where style callback
+        **/
+        any<W, T>(
+            collection: List<T>,
+            whereValue: W): boolean;
+
+        /**
+        * @see _.some
+        * @param whereValue _.where style callback
+        **/
+        any<W, T>(
+            collection: Dictionary<T>,
             whereValue: W): boolean;
     }
 
@@ -2329,6 +4073,14 @@ declare module _ {
         * @return A new array of sorted elements.
         **/
         sortBy<T, TSort>(
+            collection: Array<T>,
+            callback?: ListIterator<T, TSort>,
+            thisArg?: any): T[];
+
+        /**
+        * @see _.sortBy
+        **/
+        sortBy<T, TSort>(
             collection: List<T>,
             callback?: ListIterator<T, TSort>,
             thisArg?: any): T[];
@@ -2338,8 +4090,24 @@ declare module _ {
         * @param pluckValue _.pluck style callback
         **/
         sortBy<T>(
+            collection: Array<T>,
+            pluckValue: string): T[];
+
+        /**
+        * @see _.sortBy
+        * @param pluckValue _.pluck style callback
+        **/
+        sortBy<T>(
             collection: List<T>,
             pluckValue: string): T[];
+
+        /**
+        * @see _.sortBy
+        * @param whereValue _.where style callback
+        **/
+        sortBy<W, T>(
+            collection: Array<T>,
+            whereValue: W): T[];
 
         /**
         * @see _.sortBy
@@ -2357,7 +4125,17 @@ declare module _ {
         * @param collection The collection to convert.
         * @return The new converted array.
         **/
-        toArray<T>(collection: Collection<T>): T[];
+        toArray<T>(collection: Array<T>): T[];
+
+        /**
+        * @see _.toArray
+        **/
+        toArray<T>(collection: List<T>): T[];
+
+        /**
+        * @see _.toArray
+        **/
+        toArray<T>(collection: Dictionary<T>): T[];
     }
 
     //_.where
@@ -2370,7 +4148,21 @@ declare module _ {
         * @return A new array of elements that have the given properties.
         **/
         where<T, U extends {}>(
+            list: Array<T>,
+            properties: U): T[];
+
+        /**
+        * @see _.where
+        **/
+        where<T, U extends {}>(
             list: List<T>,
+            properties: U): T[];
+
+        /**
+        * @see _.where
+        **/
+        where<T, U extends {}>(
+            list: Dictionary<T>,
             properties: U): T[];
     }
 
@@ -2444,7 +4236,7 @@ declare module _ {
         /**
         * @see _.bindAll
         **/
-        bindAll<T>(...methodNames: string[]): LoDashWrapper<T>;
+        bindAll(...methodNames: string[]): LoDashWrapper<T>;
     }
 
     //_.bindKey
@@ -3105,6 +4897,14 @@ declare module _ {
             object: Dictionary<T>,
             callback?: ObjectIterator<T, void>,
             thisArg?: any): Dictionary<T>;
+
+        /**
+        * @see _.forIn
+        **/
+        forIn<T>(
+            object: T,
+            callback?: ObjectIterator<any, void>,
+            thisArg?: any): T;
     }
 
     interface LoDashObjectWrapper<T> {
@@ -3130,6 +4930,14 @@ declare module _ {
             object: Dictionary<T>,
             callback?: ObjectIterator<T, void>,
             thisArg?: any): Dictionary<T>;
+
+        /**
+        * @see _.forInRight
+        **/
+        forInRight<T extends {}>(
+            object: T,
+            callback?: ObjectIterator<T, void>,
+            thisArg?: any): T;
     }
 
     interface LoDashObjectWrapper<T> {
@@ -3156,6 +4964,14 @@ declare module _ {
             object: Dictionary<T>,
             callback?: ObjectIterator<T, void>,
             thisArg?: any): Dictionary<T>;
+
+        /**
+        * @see _.forOwn
+        **/
+        forOwn<T extends {}>(
+            object: T,
+            callback?: ObjectIterator<any, void>,
+            thisArg?: any): T;
     }
 
     interface LoDashObjectWrapper<T> {
@@ -3181,6 +4997,13 @@ declare module _ {
             object: Dictionary<T>,
             callback?: ObjectIterator<T, void>,
             thisArg?: any): Dictionary<T>;
+        /**
+        * @see _.forOwnRight
+        **/
+        forOwnRight<T extends {}>(
+            object: T,
+            callback?: ObjectIterator<any, void>,
+            thisArg?: any): T;
     }
 
     interface LoDashObjectWrapper<T> {
@@ -3602,7 +5425,7 @@ declare module _ {
         * @return The accumulated value.
         **/
         transform<T, Acc>(
-            collection: Collection<T>,
+            collection: Array<T>,
             callback: MemoVoidIterator<T, Acc>,
             accumulator: Acc,
             thisArg?: any): Acc;
@@ -3611,7 +5434,41 @@ declare module _ {
         * @see _.transform
         **/
         transform<T, Acc>(
-            collection: Collection<T>,
+            collection: List<T>,
+            callback: MemoVoidIterator<T, Acc>,
+            accumulator: Acc,
+            thisArg?: any): Acc;
+
+        /**
+        * @see _.transform
+        **/
+        transform<T, Acc>(
+            collection: Dictionary<T>,
+            callback: MemoVoidIterator<T, Acc>,
+            accumulator: Acc,
+            thisArg?: any): Acc;
+
+        /**
+        * @see _.transform
+        **/
+        transform<T, Acc>(
+            collection: Array<T>,
+            callback?: MemoVoidIterator<T, Acc>,
+            thisArg?: any): Acc;
+
+        /**
+        * @see _.transform
+        **/
+        transform<T, Acc>(
+            collection: List<T>,
+            callback?: MemoVoidIterator<T, Acc>,
+            thisArg?: any): Acc;
+
+        /**
+        * @see _.transform
+        **/
+        transform<T, Acc>(
+            collection: Dictionary<T>,
             callback?: MemoVoidIterator<T, Acc>,
             thisArg?: any): Acc;
     }
@@ -3829,15 +5686,15 @@ declare module _ {
     }
     */
 
-    interface Collection<T> { }
+    //interface Collection<T> {}
 
     // Common interface between Arrays and jQuery objects
-    interface List<T> extends Collection<T> {
+    interface List<T> {
         [index: number]: T;
         length: number;
     }
 
-    interface Dictionary<T> extends Collection<T> {
+    interface Dictionary<T> {
         [index: string]: T;
     }
 }
